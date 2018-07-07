@@ -24,6 +24,26 @@ public class Logs {
         this.createtime = createtime;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public void setCustid(Integer custid) {
+        this.custid = custid;
+    }
+
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
+
     public Integer getId() {
         return id;
     }

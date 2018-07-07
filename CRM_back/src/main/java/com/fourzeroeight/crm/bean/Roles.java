@@ -16,6 +16,18 @@ public class Roles {
         this.desc = desc;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     public Integer getId() {
         return id;
     }

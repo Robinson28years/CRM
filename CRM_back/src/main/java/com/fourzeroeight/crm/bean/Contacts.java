@@ -51,6 +51,62 @@ public class Contacts {
         this.title = title;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setCustid(Integer custid) {
+        this.custid = custid;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDept(String dept) {
+        this.dept = dept;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public void setDegree(Integer degree) {
+        this.degree = degree;
+    }
+
+    public void setMoreinfo(String moreinfo) {
+        this.moreinfo = moreinfo;
+    }
+
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
+
+    public void setBookid(Integer bookid) {
+        this.bookid = bookid;
+    }
+
+    public void setTitle(Integer title) {
+        this.title = title;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -60,6 +60,74 @@ public class Customers {
         this.createtime = createtime;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public void setBackground(Integer background) {
+        this.background = background;
+    }
+
+    public void setListed(Integer listed) {
+        this.listed = listed;
+    }
+
+    public void setCapital(Integer capital) {
+        this.capital = capital;
+    }
+
+    public void setSales(Integer sales) {
+        this.sales = sales;
+    }
+
+    public void setScale(Integer scale) {
+        this.scale = scale;
+    }
+
+    public void setTester(Integer tester) {
+        this.tester = tester;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setProducts(String products) {
+        this.products = products;
+    }
+
+    public void setServices(String services) {
+        this.services = services;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
+
+    public void setNewcolumn1(Integer newcolumn1) {
+        this.newcolumn1 = newcolumn1;
+    }
+
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
+
     public Integer getId() {
         return id;
     }

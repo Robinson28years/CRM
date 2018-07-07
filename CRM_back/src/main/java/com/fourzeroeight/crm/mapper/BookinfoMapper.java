@@ -3,6 +3,8 @@ package com.fourzeroeight.crm.mapper;
 import com.fourzeroeight.crm.bean.Bookinfo;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+@Mapper
 public interface BookinfoMapper {
     @Delete({
         "delete from bookinfo",
@@ -12,7 +14,7 @@ public interface BookinfoMapper {
 
     @Insert({
         "insert into bookinfo (id, title, ",
-        "desc, booktime, ",
+        "descs, booktime, ",
         "createtime)",
         "values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, ",
         "#{desc,jdbcType=INTEGER}, #{booktime,jdbcType=TIMESTAMP}, ",
@@ -24,7 +26,7 @@ public interface BookinfoMapper {
 
     @Select({
         "select",
-        "id, title, desc, booktime, createtime",
+        "id, title, descs, booktime, createtime",
         "from bookinfo",
         "where id = #{id,jdbcType=INTEGER}"
     })
@@ -36,10 +38,18 @@ public interface BookinfoMapper {
     @Update({
         "update bookinfo",
         "set title = #{title,jdbcType=VARCHAR},",
-          "desc = #{desc,jdbcType=INTEGER},",
+          "descs = #{descs,jdbcType=INTEGER},",
           "booktime = #{booktime,jdbcType=TIMESTAMP},",
           "createtime = #{createtime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Bookinfo record);
+
+    @Select({
+            "select",
+            "id, title, descs, booktime, createtime",
+            "from bookinfo"
+    })
+    @ResultMap("BaseResultMap")
+    List<Bookinfo> select();
 }
