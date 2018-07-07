@@ -89,11 +89,86 @@ export const asyncRouterMap = [
       icon: 'peoples'
     },
     children: [
-      // { path: 'json-editor', component: _import('components-demo/jsonEditor'), name: 'jsonEditor-demo', meta: { title: '人员注册' }},
       { path: 'add', component: _import('user/add'), name: 'add', meta: { title: '新增用户' ,icon: 'owner'}},
       { path: 'list', component: _import('user/list'), name: 'list', meta: { title: '管理用户' ,icon: 'property'}},
     ]
   },
+
+  {
+    path: '/customer',
+    component: Layout,
+    redirect: 'noredirect',
+    name: 'customer',
+    meta: {
+      title: '客户管理',
+      icon: 'peoples'
+    },
+    children: [
+      { path: 'add', component: _import('customer/add'), name: 'add', meta: { title: '新增用户' ,icon: 'owner'}},
+      { path: 'list', component: _import('customer/list'), name: 'list', meta: { title: '管理用户' ,icon: 'property'}},
+    ]
+  },
+
+  {
+    path: '/contact',
+    component: Layout,
+    redirect: 'noredirect',
+    name: 'contact',
+    meta: {
+      title: '联络管理',
+      icon: 'peoples'
+    },
+    children: [
+      { path: 'add', component: _import('contact/add'), name: 'add', meta: { title: '新增联络' ,icon: 'owner'}},
+      { path: 'list', component: _import('contact/list'), name: 'list', meta: { title: '管理联络' ,icon: 'property'}},
+    ]
+  },
+
+  {
+    path: '/file',
+    component: Layout,
+    redirect: 'noredirect',
+    name: 'file',
+    meta: {
+      title: '文档管理',
+      icon: 'peoples'
+    },
+    children: [
+      { path: 'add', component: _import('file/add'), name: 'add', meta: { title: '新增文档' ,icon: 'owner'}},
+      { path: 'list', component: _import('file/list'), name: 'list', meta: { title: '管理文档' ,icon: 'property'}},
+    ]
+  },
+
+  {
+    path: '/book',
+    component: Layout,
+    redirect: 'noredirect',
+    name: 'book',
+    meta: {
+      title: '预定管理',
+      icon: 'peoples'
+    },
+    children: [
+      { path: 'add', component: _import('book/add'), name: 'add', meta: { title: '新增预定' ,icon: 'owner'}},
+      { path: 'list', component: _import('book/list'), name: 'list', meta: { title: '管理预定' ,icon: 'property'}},
+    ]
+  },
+
+  {
+    path: '/log',
+    component: Layout,
+    redirect: 'noredirect',
+    name: 'log',
+    meta: {
+      title: '日志管理',
+      icon: 'peoples'
+    },
+    children: [
+      { path: 'add', component: _import('log/add'), name: 'add', meta: { title: '新增日志' ,icon: 'owner'}},
+      { path: 'list', component: _import('log/list'), name: 'list', meta: { title: '管理日志' ,icon: 'property'}},
+    ]
+  },
+  
 
   {
     path: '/manager',

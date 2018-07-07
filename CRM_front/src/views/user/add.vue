@@ -21,7 +21,7 @@
           </el-date-picker>
         </div>
       </el-form-item>
-      <el-form-item label="性别" prop="role">
+      <el-form-item label="性别" prop="sex">
         <el-radio-group v-model="ruleForm2.date">
           <el-radio :label="3">男</el-radio>
           <el-radio :label="6">女</el-radio>
@@ -79,6 +79,21 @@
           name: [{
             required: true,
             message: '请输入姓名',
+            trigger: 'blur'
+          }, ],
+          date: [{
+            required: true,
+            message: '请选择日期',
+            trigger: 'blur'
+          }, ],
+          sex: [{
+            required: true,
+            message: '请选择性别',
+            trigger: 'blur'
+          }, ],
+          role: [{
+            required: true,
+            message: '请选择角色',
             trigger: 'blur'
           }, ],
           pass: [{
