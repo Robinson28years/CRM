@@ -16,9 +16,6 @@
   <insert id="insertSelective" parameterType="com.fourzeroeight.crm.bean.Logs">
     insert into logs
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="title != null">
         title,
       </if>
@@ -53,9 +50,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.fourzeroeight.crm.bean.Logs">
     update logs
     <set>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
       <if test="desc != null">
         desc = #{desc,jdbcType=VARCHAR},
       </if>

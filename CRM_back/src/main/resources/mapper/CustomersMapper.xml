@@ -29,9 +29,6 @@
   <insert id="insertSelective" parameterType="com.fourzeroeight.crm.bean.Customers">
     insert into customers
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="name != null">
         name,
       </if>
@@ -82,9 +79,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
