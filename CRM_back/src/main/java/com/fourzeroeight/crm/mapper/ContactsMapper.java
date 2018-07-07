@@ -11,13 +11,13 @@ public interface ContactsMapper {
     int deleteByPrimaryKey(Integer id);
 
     @Insert({
-        "insert into contacts (id, custid, ",
+        "insert into contacts (custid, ",
         "name, dept, position, ",
         "telephone, mobile, ",
         "email, qq, degree, ",
         "moreinfo, createtime, ",
         "bookid, title)",
-        "values (#{id,jdbcType=INTEGER}, #{custid,jdbcType=INTEGER}, ",
+        "values (#{custid,jdbcType=INTEGER}, ",
         "#{name,jdbcType=VARCHAR}, #{dept,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, ",
         "#{telephone,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, ",
         "#{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{degree,jdbcType=INTEGER}, ",

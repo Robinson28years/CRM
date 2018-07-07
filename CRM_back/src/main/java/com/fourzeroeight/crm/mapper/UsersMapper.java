@@ -11,10 +11,10 @@ public interface UsersMapper {
     int deleteByPrimaryKey(Integer id);
 
     @Insert({
-        "insert into users (id, username, ",
+        "insert into users (username, ",
         "password, sex, birthday, ",
         "roleid, status)",
-        "values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, ",
+        "values (#{username,jdbcType=VARCHAR}, ",
         "#{password,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, ",
         "#{roleid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})"
     })

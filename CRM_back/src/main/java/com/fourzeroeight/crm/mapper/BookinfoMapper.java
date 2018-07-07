@@ -13,10 +13,10 @@ public interface BookinfoMapper {
     int deleteByPrimaryKey(Integer id);
 
     @Insert({
-        "insert into bookinfo (id, title, ",
+        "insert into bookinfo (title, ",
         "descs, booktime, ",
         "createtime)",
-        "values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, ",
+        "values (#{title,jdbcType=VARCHAR}, ",
         "#{desc,jdbcType=INTEGER}, #{booktime,jdbcType=TIMESTAMP}, ",
         "#{createtime,jdbcType=TIMESTAMP})"
     })

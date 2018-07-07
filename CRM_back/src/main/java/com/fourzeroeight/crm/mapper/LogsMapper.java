@@ -11,9 +11,9 @@ public interface LogsMapper {
     int deleteByPrimaryKey(Integer id);
 
     @Insert({
-        "insert into logs (id, title, ",
+        "insert into logs (title, ",
         "desc, custid, createtime)",
-        "values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, ",
+        "values (#{title,jdbcType=VARCHAR}, ",
         "#{desc,jdbcType=VARCHAR}, #{custid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP})"
     })
     int insert(Logs record);

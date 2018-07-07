@@ -11,9 +11,9 @@ public interface RolesMapper {
     int deleteByPrimaryKey(Integer id);
 
     @Insert({
-        "insert into roles (id, name, ",
+        "insert into roles (name, ",
         "desc)",
-        "values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, ",
+        "values (#{name,jdbcType=VARCHAR}, ",
         "#{desc,jdbcType=VARCHAR})"
     })
     int insert(Roles record);

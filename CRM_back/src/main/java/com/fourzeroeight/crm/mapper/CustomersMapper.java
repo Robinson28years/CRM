@@ -11,7 +11,7 @@ public interface CustomersMapper {
     int deleteByPrimaryKey(Integer id);
 
     @Insert({
-        "insert into customers (id, name, ",
+        "insert into customers (name, ",
         "type, background, ",
         "listed, capital, ",
         "sales, scale, tester, ",
@@ -19,7 +19,7 @@ public interface CustomersMapper {
         "products, services, ",
         "userid, NewColumn1, ",
         "createtime)",
-        "values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, ",
+        "values (#{name,jdbcType=VARCHAR}, ",
         "#{type,jdbcType=INTEGER}, #{background,jdbcType=INTEGER}, ",
         "#{listed,jdbcType=INTEGER}, #{capital,jdbcType=INTEGER}, ",
         "#{sales,jdbcType=INTEGER}, #{scale,jdbcType=INTEGER}, #{tester,jdbcType=INTEGER}, ",
