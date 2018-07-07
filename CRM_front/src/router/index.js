@@ -104,8 +104,8 @@ export const asyncRouterMap = [
       icon: 'peoples'
     },
     children: [
-      { path: 'add', component: _import('customer/add'), name: 'add', meta: { title: '新增用户' ,icon: 'owner'}},
-      { path: 'list', component: _import('customer/list'), name: 'list', meta: { title: '管理用户' ,icon: 'property'}},
+      { path: 'add', component: _import('customer/add'), name: 'add', meta: { title: '新增客户' ,icon: 'owner'}},
+      { path: 'list', component: _import('customer/list'), name: 'list', meta: { title: '管理客户' ,icon: 'property'}},
     ]
   },
 
