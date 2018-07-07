@@ -9,12 +9,14 @@
         <el-input type="text" v-model="ruleForm2.name" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="pass">
+        <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item label="确认密码" prop="checkPass">
         <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item label="出生日期" prop="date">
         <div class="block">
+          <!-- <span class="demonstration">默认</span> -->
           <el-date-picker v-model="ruleForm2.date" type="date" placeholder="选择日期">
           </el-date-picker>
         </div>
