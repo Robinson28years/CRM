@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fourzeroeight.crm.mapper.CustomersMapper">
+  <resultMap id="BaseResultMap" type="com.fourzeroeight.crm.bean.Customers">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="background" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="listed" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="capital" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="sales" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="scale" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="tester" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="url" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="zipcode" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="address" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="products" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="services" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="userid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="NewColumn1" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, type, background, listed, capital, sales, scale, tester, url, zipcode, 
+    address, products, services, userid, NewColumn1, createtime
+  </sql>
+  <insert id="insertSelective" parameterType="com.fourzeroeight.crm.bean.Customers">
+    insert into customers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="background != null">
+        background,
+      </if>
+      <if test="listed != null">
+        listed,
+      </if>
+      <if test="capital != null">
+        capital,
+      </if>
+      <if test="sales != null">
+        sales,
+      </if>
+      <if test="scale != null">
+        scale,
+      </if>
+      <if test="tester != null">
+        tester,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="zipcode != null">
+        zipcode,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="products != null">
+        products,
+      </if>
+      <if test="services != null">
+        services,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="newcolumn1 != null">
+        NewColumn1,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="background != null">
+        #{background,jdbcType=INTEGER},
+      </if>
+      <if test="listed != null">
+        #{listed,jdbcType=INTEGER},
+      </if>
+      <if test="capital != null">
+        #{capital,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null">
+        #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="scale != null">
+        #{scale,jdbcType=INTEGER},
+      </if>
+      <if test="tester != null">
+        #{tester,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null">
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="products != null">
+        #{products,jdbcType=VARCHAR},
+      </if>
+      <if test="services != null">
+        #{services,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="newcolumn1 != null">
+        #{newcolumn1,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fourzeroeight.crm.bean.Customers">
+    update customers
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="background != null">
+        background = #{background,jdbcType=INTEGER},
+      </if>
+      <if test="listed != null">
+        listed = #{listed,jdbcType=INTEGER},
+      </if>
+      <if test="capital != null">
+        capital = #{capital,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null">
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="scale != null">
+        scale = #{scale,jdbcType=INTEGER},
+      </if>
+      <if test="tester != null">
+        tester = #{tester,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null">
+        zipcode = #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="products != null">
+        products = #{products,jdbcType=VARCHAR},
+      </if>
+      <if test="services != null">
+        services = #{services,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="newcolumn1 != null">
+        NewColumn1 = #{newcolumn1,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
