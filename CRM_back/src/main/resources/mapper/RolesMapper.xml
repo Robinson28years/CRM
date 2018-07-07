@@ -14,9 +14,6 @@
   <insert id="insertSelective" parameterType="com.fourzeroeight.crm.bean.Roles">
     insert into roles
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="name != null">
         name,
       </if>
@@ -25,9 +22,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
