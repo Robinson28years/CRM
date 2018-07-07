@@ -40,7 +40,7 @@ export const constantRouterMap = [
       path: 'dashboard',
       component: _import('dashboard/index'),
       name: 'dashboard',
-      meta: { title: 'dashboard', icon: 'dashboard',roles: ['admin', 'property'], noCache: true }
+      meta: { title: '客户管理系统', icon: 'dashboard',roles: ['admin', 'property'], noCache: true }
     }]
   },
 
@@ -79,6 +79,21 @@ export const asyncRouterMap = [
   //     meta: { title: '注册申请', icon: 'people', noCache: true }
   //   },]
   // },
+  {
+    path: '/user',
+    component: Layout,
+    redirect: 'noredirect',
+    name: 'user',
+    meta: {
+      title: '用户管理',
+      icon: 'peoples'
+    },
+    children: [
+      // { path: 'json-editor', component: _import('components-demo/jsonEditor'), name: 'jsonEditor-demo', meta: { title: '人员注册' }},
+      { path: 'add', component: _import('user/add'), name: 'add', meta: { title: '新增用户' ,icon: 'owner'}},
+      { path: 'list', component: _import('user/list'), name: 'list', meta: { title: '管理用户' ,icon: 'property'}},
+    ]
+  },
 
   {
     path: '/manager',
