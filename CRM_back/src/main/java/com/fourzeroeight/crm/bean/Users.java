@@ -1,0 +1,60 @@
+package com.fourzeroeight.crm.bean;
+
+import java.util.Date;
+
+public class Users {
+    private Integer id;
+
+    private String username;
+
+    private String password;
+
+    private String sex;
+
+    private Date birthday;
+
+    private Integer roleid;
+
+    private Integer status;
+
+    public Users() {
+    }
+
+    public Users(Integer id, String username, String password, String sex, Date birthday, Integer roleid, Integer status) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.roleid = roleid;
+        this.status = status;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public Integer getRoleid() {
+        return roleid;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+}

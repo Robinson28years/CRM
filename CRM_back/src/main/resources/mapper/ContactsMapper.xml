@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fourzeroeight.crm.mapper.ContactsMapper">
+  <resultMap id="BaseResultMap" type="com.fourzeroeight.crm.bean.Contacts">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="custid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="dept" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="position" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="telephone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="mobile" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="qq" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="degree" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="moreinfo" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="bookid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="title" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, custid, name, dept, position, telephone, mobile, email, qq, degree, moreinfo, 
+    createtime, bookid, title
+  </sql>
+  <insert id="insertSelective" parameterType="com.fourzeroeight.crm.bean.Contacts">
+    insert into contacts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="custid != null">
+        custid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="dept != null">
+        dept,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="degree != null">
+        degree,
+      </if>
+      <if test="moreinfo != null">
+        moreinfo,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="bookid != null">
+        bookid,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="custid != null">
+        #{custid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dept != null">
+        #{dept,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=INTEGER},
+      </if>
+      <if test="moreinfo != null">
+        #{moreinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookid != null">
+        #{bookid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fourzeroeight.crm.bean.Contacts">
+    update contacts
+    <set>
+      <if test="custid != null">
+        custid = #{custid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dept != null">
+        dept = #{dept,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        degree = #{degree,jdbcType=INTEGER},
+      </if>
+      <if test="moreinfo != null">
+        moreinfo = #{moreinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookid != null">
+        bookid = #{bookid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
