@@ -1,5 +1,8 @@
 package com.fourzeroeight.crm.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Users {
@@ -11,6 +14,8 @@ public class Users {
 
     private String sex;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date birthday;
 
     private Integer roleid;

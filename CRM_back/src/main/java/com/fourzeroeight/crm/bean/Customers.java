@@ -1,5 +1,8 @@
 package com.fourzeroeight.crm.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Customers {
@@ -35,6 +38,8 @@ public class Customers {
 
     private Integer newcolumn1;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createtime;
 
     public Customers() {
