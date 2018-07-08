@@ -16,4 +16,21 @@ public class BookinfoServiceImpl implements BookinfoService {
     public List<Bookinfo> getAll() {
         return bookinfoMapper.select();
     }
+
+    @Override
+    public void delete(int id) {
+        bookinfoMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void add(Bookinfo bookinfo) {
+        bookinfoMapper.insertSelective(bookinfo);
+    }
+
+    @Override
+    public void update(Bookinfo bookinfo) {
+        bookinfoMapper.updateByPrimaryKeySelective(bookinfo);
+    }
+
+
 }

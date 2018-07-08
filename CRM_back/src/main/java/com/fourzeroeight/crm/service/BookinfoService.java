@@ -6,4 +6,10 @@ import java.util.List;
 
 public interface BookinfoService {
     List<Bookinfo> getAll();
+
+    void delete(int id);
+
+    void add(Bookinfo bookinfo);
+
+    void update(Bookinfo bookinfo);
 }
