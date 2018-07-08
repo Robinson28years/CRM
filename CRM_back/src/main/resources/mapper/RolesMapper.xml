@@ -9,7 +9,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, desc
+    id, name, descs
   </sql>
   <insert id="insertSelective" parameterType="com.fourzeroeight.crm.bean.Roles">
     insert into roles
@@ -25,8 +25,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null">
-        #{desc,jdbcType=VARCHAR},
+      <if test="descs != null">
+        #{descs,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -36,7 +36,7 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null">
+      <if test="descs != null">
         descs = #{descs,jdbcType=VARCHAR},
       </if>
     </set>
