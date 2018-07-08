@@ -26,4 +26,10 @@ public class LoginController {
         }
         return message;
     }
+
+    @RequestMapping(value = "/logout" ,method = RequestMethod.POST)
+    public Message logout(HttpSession httpSession) {
+        httpSession.removeAttribute("user");
+        return new Message(1,"注销成功!",null);
+    }
 }
