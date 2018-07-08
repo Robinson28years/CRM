@@ -50,7 +50,7 @@
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null">
+      <if test="descs != null">
         descs = #{descs,jdbcType=INTEGER},
       </if>
       <if test="booktime != null">
