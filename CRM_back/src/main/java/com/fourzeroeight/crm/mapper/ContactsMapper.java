@@ -4,7 +4,7 @@ import com.fourzeroeight.crm.bean.Contacts;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
-
+@Mapper
 public interface ContactsMapper {
     @Delete({
         "delete from contacts",

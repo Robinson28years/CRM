@@ -4,7 +4,7 @@ import com.fourzeroeight.crm.bean.Customers;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
-
+@Mapper
 public interface CustomersMapper {
     @Delete({
         "delete from customers",
