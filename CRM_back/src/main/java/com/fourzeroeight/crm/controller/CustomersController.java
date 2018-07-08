@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/contacts")
+@RequestMapping("/api/Customers")
 public class CustomersController {
 
     @Autowired
