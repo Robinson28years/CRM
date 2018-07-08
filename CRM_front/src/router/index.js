@@ -101,7 +101,7 @@ export const asyncRouterMap = [
     name: 'customer',
     meta: {
       title: '客户管理',
-      icon: 'peoples'
+      icon: 'customer'
     },
     children: [
       { path: 'add', component: _import('customer/add'), name: 'add', meta: { title: '新增客户' ,icon: 'owner'}},
@@ -116,7 +116,7 @@ export const asyncRouterMap = [
     name: 'contact',
     meta: {
       title: '联络管理',
-      icon: 'peoples'
+      icon: 'contact'
     },
     children: [
       { path: 'add', component: _import('contact/add'), name: 'add', meta: { title: '新增联络' ,icon: 'owner'}},
@@ -131,7 +131,7 @@ export const asyncRouterMap = [
     name: 'file',
     meta: {
       title: '文档管理',
-      icon: 'peoples'
+      icon: 'file'
     },
     children: [
       { path: 'add', component: _import('file/add'), name: 'add', meta: { title: '新增文档' ,icon: 'owner'}},
@@ -146,7 +146,7 @@ export const asyncRouterMap = [
     name: 'book',
     meta: {
       title: '预定管理',
-      icon: 'peoples'
+      icon: 'book'
     },
     children: [
       { path: 'add', component: _import('book/add'), name: 'add', meta: { title: '新增预定' ,icon: 'owner'}},
@@ -161,7 +161,7 @@ export const asyncRouterMap = [
     name: 'log',
     meta: {
       title: '日志管理',
-      icon: 'peoples'
+      icon: 'log'
     },
     children: [
       { path: 'add', component: _import('log/add'), name: 'add', meta: { title: '新增日志' ,icon: 'owner'}},
@@ -170,94 +170,94 @@ export const asyncRouterMap = [
   },
   
 
-  {
-    path: '/manager',
-    component: Layout,
-    redirect: 'noredirect',
-    name: 'manager',
-    meta: {
-      title: '人员管理',
-      icon: 'peoples'
-    },
-    children: [
-      // { path: 'json-editor', component: _import('components-demo/jsonEditor'), name: 'jsonEditor-demo', meta: { title: '人员注册' }},
-      { path: 'owner', component: _import('manager/owner'), name: 'owner', meta: { title: '业主管理' ,icon: 'owner'}},
-      { path: 'property', component: _import('manager/property'), name: 'property', meta: { title: '内部人员管理' ,icon: 'property'}},
-      { path: 'visiter', component: _import('manager/visiter'), name: 'visiter', meta: { title: '访客管理' ,icon: 'visiter'}},
-      { path: 'splitpane', component: _import('components-demo/splitpane'), name: 'splitpane-demo', meta: { title: '非注册人员管理' ,icon: 'user2'}},
-    ]
-  },
+  // {
+  //   path: '/manager',
+  //   component: Layout,
+  //   redirect: 'noredirect',
+  //   name: 'manager',
+  //   meta: {
+  //     title: '人员管理',
+  //     icon: 'peoples'
+  //   },
+  //   children: [
+  //     // { path: 'json-editor', component: _import('components-demo/jsonEditor'), name: 'jsonEditor-demo', meta: { title: '人员注册' }},
+  //     { path: 'owner', component: _import('manager/owner'), name: 'owner', meta: { title: '业主管理' ,icon: 'owner'}},
+  //     { path: 'property', component: _import('manager/property'), name: 'property', meta: { title: '内部人员管理' ,icon: 'property'}},
+  //     { path: 'visiter', component: _import('manager/visiter'), name: 'visiter', meta: { title: '访客管理' ,icon: 'visiter'}},
+  //     { path: 'splitpane', component: _import('components-demo/splitpane'), name: 'splitpane-demo', meta: { title: '非注册人员管理' ,icon: 'user2'}},
+  //   ]
+  // },
 
-  {
-    path: '/power',
-    component: Layout,
-    redirect: 'noredirect',
-    name: 'power',
-    meta: {
-      title: '权限管理',
-      icon: 'lock'
-    },
-    children: [
-      { path: 'door', component: _import('power/door'), name: 'power', meta: { title: '大门权限', noCache: true ,icon: 'door'}},
-      { path: 'index', component: _import('power/index'), name: 'index', meta: { title: '楼幢权限', noCache: true ,icon: 'building'}},
-    ]
-  },
+  // {
+  //   path: '/power',
+  //   component: Layout,
+  //   redirect: 'noredirect',
+  //   name: 'power',
+  //   meta: {
+  //     title: '权限管理',
+  //     icon: 'lock'
+  //   },
+  //   children: [
+  //     { path: 'door', component: _import('power/door'), name: 'power', meta: { title: '大门权限', noCache: true ,icon: 'door'}},
+  //     { path: 'index', component: _import('power/index'), name: 'index', meta: { title: '楼幢权限', noCache: true ,icon: 'building'}},
+  //   ]
+  // },
+
+  // // {
+  // //   path: '/visits',
+  // //   component: Layout,
+  // //   redirect: 'noredirect',
+  // //   name: 'visits',
+  // //   meta: {
+  // //     title: '门禁进出情况',
+  // //     icon: 'visiter3'
+  // //   },
+  // //   children: [
+  // //     { path: 'owner', component: _import('visits/owner2'), name: 'owner', meta: { title: '业主进出', noCache: true ,icon: 'owner'}},
+  // //     { path: 'line', component: _import('visits/owner3'), name: 'lineChart', meta: { title: '门禁进出情况', noCache: true ,icon: 'visiter'}},
+  // //     { path: 'line', component: _import('charts/line'), name: 'lineChart', meta: { title: '非注册人员情况', noCache: true ,icon: 'user2'}},
+  // //   ]
+  // // },
 
   // {
   //   path: '/visits',
   //   component: Layout,
+  //   children: [{
+  //     path: 'index',
+  //     component: _import('visits/owner3'),
+  //     name: 'visit',
+  //     meta: { title: '门禁进出情况', icon: 'visiter3', noCache: true }
+  //   }]
+  // },
+
+
+
+  // {
+  //   path: '/controller',
+  //   component: Layout,
   //   redirect: 'noredirect',
-  //   name: 'visits',
+  //   name: 'controller',
   //   meta: {
-  //     title: '门禁进出情况',
-  //     icon: 'visiter3'
+  //     title: '门禁控制',
+  //     icon: 'machine3'
   //   },
   //   children: [
-  //     { path: 'owner', component: _import('visits/owner2'), name: 'owner', meta: { title: '业主进出', noCache: true ,icon: 'owner'}},
-  //     { path: 'line', component: _import('visits/owner3'), name: 'lineChart', meta: { title: '门禁进出情况', noCache: true ,icon: 'visiter'}},
-  //     { path: 'line', component: _import('charts/line'), name: 'lineChart', meta: { title: '非注册人员情况', noCache: true ,icon: 'user2'}},
+  //     { path: 'door', component: _import('controller/door'), name: 'door', meta: { title: '大门控制', noCache: true ,icon: 'door'}},
+  //     { path: 'index', component: _import('controller/index'), name: 'index', meta: { title: '楼幢控制', noCache: true ,icon: 'building'}}
   //   ]
   // },
 
-  {
-    path: '/visits',
-    component: Layout,
-    children: [{
-      path: 'index',
-      component: _import('visits/owner3'),
-      name: 'visit',
-      meta: { title: '门禁进出情况', icon: 'visiter3', noCache: true }
-    }]
-  },
 
-
-
-  {
-    path: '/controller',
-    component: Layout,
-    redirect: 'noredirect',
-    name: 'controller',
-    meta: {
-      title: '门禁控制',
-      icon: 'machine3'
-    },
-    children: [
-      { path: 'door', component: _import('controller/door'), name: 'door', meta: { title: '大门控制', noCache: true ,icon: 'door'}},
-      { path: 'index', component: _import('controller/index'), name: 'index', meta: { title: '楼幢控制', noCache: true ,icon: 'building'}}
-    ]
-  },
-
-
-  {
-    path: '/state',
-    component: Layout,
-    children: [{
-      path: 'index',
-      component: _import('state/index'),
-      name: 'icon2',
-      meta: { title: '设备运行情况', icon: 'machine2', noCache: true }
-    }]
-  },
+  // {
+  //   path: '/state',
+  //   component: Layout,
+  //   children: [{
+  //     path: 'index',
+  //     component: _import('state/index'),
+  //     name: 'icon2',
+  //     meta: { title: '设备运行情况', icon: 'machine2', noCache: true }
+  //   }]
+  // },
 
 
 
