@@ -2,6 +2,9 @@ package com.fourzeroeight.crm.mapper;
 
 import com.fourzeroeight.crm.bean.Files;
 import org.apache.ibatis.annotations.*;
+
+import java.util.List;
+
 @Mapper
 public interface FilesMapper {
     @Delete({
@@ -47,4 +50,12 @@ public interface FilesMapper {
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Files record);
+
+    @Select({
+            "select",
+            "id, url, name, title, descs, type, createtime, custid",
+            "from files",
+    })
+    @ResultMap("BaseResultMap")
+    List<Files> select();
 }
