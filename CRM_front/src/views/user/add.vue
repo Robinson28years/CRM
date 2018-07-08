@@ -17,30 +17,31 @@
       <el-form-item label="出生日期" prop="date">
         <div class="block">
           <!-- <span class="demonstration">默认</span> -->
-          <el-date-picker v-model="ruleForm2.date" type="date" placeholder="选择日期">
+          <el-date-picker v-model="ruleForm2.date" type="datetime" placeholder="选择日期">
           </el-date-picker>
         </div>
       </el-form-item>
       <el-form-item label="性别" prop="sex">
-        <el-radio-group v-model="ruleForm2.date">
-          <el-radio :label="3">男</el-radio>
-          <el-radio :label="6">女</el-radio>
+        <el-radio-group v-model="ruleForm2.sex">
+          <el-radio label="男">男</el-radio>
+          <el-radio label="女">女</el-radio>
         </el-radio-group>
       </el-form-item>
-        <el-form-item label="角色" prop="role">
-          <el-select v-model="ruleForm2.value" placeholder="请选择">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
-          <el-button @click="resetForm('ruleForm2')">重置</el-button>
-        </el-form-item>
+      <el-form-item label="角色" prop="role">
+        <el-select v-model="ruleForm2.roleid" placeholder="请选择">
+          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
+        <el-button @click="resetForm('ruleForm2')">重置</el-button>
+      </el-form-item>
     </el-form>
   </div>
 </template>
 <script>
+  import * as util from '@/utils/index'
   export default {
     data() {
       var validatePass = (rule, value, callback) => {
@@ -68,12 +69,19 @@
           pass: '',
           checkPass: '',
           radio: '',
+          sex: '',
           date: '',
-          value: '',
+          roleid: '',
         },
         options: [{
-            value: 'admin',
-            label: '管理员'
+          value: '1',
+          label: '管理员'
+        }, {
+          value: '2',
+          label: '销售'
+        }, {
+          value: '3',
+          label: '业务经理'
         }],
         rules2: {
           name: [{
@@ -110,15 +118,32 @@
       };
     },
     methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
+      submitForm() {
+        console.log(util.parseTime(this.ruleForm2.date))
+        axios.post('/api/users/add', {
+          "username": this.ruleForm2.name,
+          "password": this.ruleForm2.pass,
+          "sex": this.ruleForm2.sex,
+          "birthday": util.parseTime(this.ruleForm2.date),
+          "roleid": this.ruleForm2.roleid,
+          "status": 0,
+          // "createtime": this.ruleForm2.name,
+        }).then(response => {
+          this.$message({
+            message: '添加用户成功',
+            type: 'success'
+          })
+          this.router.push('/user/list')
+          console.log(response.data)
+        })
+        // this.$refs[formName].validate((valid) => {
+        //   if (valid) {
+        //     alert('submit!');
+        //   } else {
+        //     console.log('error submit!!');
+        //     return false;
+        //   }
+        // });
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
