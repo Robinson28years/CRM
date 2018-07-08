@@ -7,7 +7,7 @@ public class Bookinfo {
 
     private String title;
 
-    private Integer descs;
+    private String descs;
 
     private Date booktime;
 
@@ -16,7 +16,7 @@ public class Bookinfo {
     public Bookinfo() {
     }
 
-    public Bookinfo(Integer id, String title, Integer descs, Date booktime, Date createtime) {
+    public Bookinfo(Integer id, String title, String descs, Date booktime, Date createtime) {
         this.id = id;
         this.title = title;
         this.descs = descs;
@@ -32,7 +32,7 @@ public class Bookinfo {
         this.title = title;
     }
 
-    public void setDescs(Integer descs) {
+    public void setDescs(String descs) {
         this.descs = descs;
     }
 
@@ -52,7 +52,7 @@ public class Bookinfo {
         return title;
     }
 
-    public Integer getDescs() {
+    public String getDescs() {
         return descs;
     }
 

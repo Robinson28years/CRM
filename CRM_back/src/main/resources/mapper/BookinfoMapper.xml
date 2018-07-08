@@ -5,7 +5,7 @@
     <constructor>
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="descs" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="descs" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="booktime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
@@ -34,7 +34,7 @@
         #{title,jdbcType=VARCHAR},
       </if>
       <if test="descs != null">
-        #{descs,jdbcType=INTEGER},
+        #{descs,jdbcType=VARCHAR},
       </if>
       <if test="booktime != null">
         #{booktime,jdbcType=TIMESTAMP},
@@ -51,7 +51,7 @@
         title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="descs != null">
-        descs = #{descs,jdbcType=INTEGER},
+        descs = #{descs,jdbcType=VARCHAR},
       </if>
       <if test="booktime != null">
         booktime = #{booktime,jdbcType=TIMESTAMP},
