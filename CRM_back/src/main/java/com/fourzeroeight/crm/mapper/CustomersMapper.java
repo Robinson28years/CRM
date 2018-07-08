@@ -3,6 +3,8 @@ package com.fourzeroeight.crm.mapper;
 import com.fourzeroeight.crm.bean.Customers;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 public interface CustomersMapper {
     @Delete({
         "delete from customers",
@@ -65,4 +67,13 @@ public interface CustomersMapper {
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Customers record);
+
+    @Select({
+            "select",
+            "id, name, type, background, listed, capital, sales, scale, tester, url, zipcode, ",
+            "address, products, services, userid, NewColumn1, createtime",
+            "from customers"
+    })
+    @ResultMap("BaseResultMap")
+    List<Customers> select();
 }
