@@ -15,3 +15,9 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:
   port: 8080
+
+com:
+  sxito:
+    custom:
+      windows-path: d:/sxito
+      linux-path: ~/sxito
