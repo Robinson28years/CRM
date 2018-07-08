@@ -14,6 +14,8 @@ public class Bookinfo {
 
     private Integer custid;
 
+    private Customers cust;
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date booktime;
@@ -32,6 +34,14 @@ public class Bookinfo {
         this.booktime = booktime;
         this.createtime = createtime;
         this.custid = custid;
+    }
+
+    public Customers getCust() {
+        return cust;
+    }
+
+    public void setCust(Customers cust) {
+        this.cust = cust;
     }
 
     public Integer getCustid() {
