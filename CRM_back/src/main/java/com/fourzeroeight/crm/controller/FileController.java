@@ -19,7 +19,7 @@ import java.util.Map;
 public class FileController {
 
     @CrossOrigin
-    @RequestMapping(value = "/public/upload/{dirname}")
+    @RequestMapping(value = "/api/public/upload/{dirname}")
     public Message upload(@RequestParam MultipartFile file, @PathVariable(name = "dirname") String save) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         if (file.isEmpty()) {
@@ -27,14 +27,14 @@ public class FileController {
         }else{
             Map map = UploadUtil.singleFileUpload(file,save, CommonUtil.getIpAddr(request));
             if((Boolean) map.get("status")){
-                return new Message(1,"保存成功", "http://127.0.0.1/public/download/"+ save + "?filename="+map.get("path"));
+                return new Message(1,"保存成功", "http://127.0.0.1:8080/public/download/"+ save + "?filename="+map.get("path"));
             }else{
                 return new Message(0,"保存失败",null);
             }
         }
     }
 
-    @RequestMapping(value = "/public/download/{dirname}")
+    @RequestMapping(value = "/api/public/download/{dirname}")
     public void chatdownFile(
             @RequestParam(value = "filename") String filename,@PathVariable(name = "dirname") String save,
             HttpServletResponse response,
