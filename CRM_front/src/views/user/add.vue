@@ -129,11 +129,13 @@
           "status": 0,
           // "createtime": this.ruleForm2.name,
         }).then(response => {
-          this.$message({
-            message: '添加用户成功',
-            type: 'success'
-          })
-          this.router.push('/user/list')
+          this.$notify({
+              title: '成功',
+              message: '添加用户成功',
+              type: 'success',
+              duration: 2000
+            })
+          this.$router.push('/user/list')
           console.log(response.data)
         })
         // this.$refs[formName].validate((valid) => {
