@@ -1,5 +1,8 @@
 package com.fourzeroeight.crm.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Logs {
@@ -7,19 +10,21 @@ public class Logs {
 
     private String title;
 
-    private String desc;
+    private String descs;
 
     private Integer custid;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createtime;
 
     public Logs() {
     }
 
-    public Logs(Integer id, String title, String desc, Integer custid, Date createtime) {
+    public Logs(Integer id, String title, String descs, Integer custid, Date createtime) {
         this.id = id;
         this.title = title;
-        this.desc = desc;
+        this.descs = descs;
         this.custid = custid;
         this.createtime = createtime;
     }
@@ -32,8 +37,8 @@ public class Logs {
         this.title = title;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescs(String descs) {
+        this.descs = descs;
     }
 
     public void setCustid(Integer custid) {
@@ -52,8 +57,8 @@ public class Logs {
         return title;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescs() {
+        return descs;
     }
 
     public Integer getCustid() {

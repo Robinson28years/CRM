@@ -5,13 +5,13 @@
     <constructor>
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="desc" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="descs" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="custid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, desc, custid, createtime
+    id, title, descs, custid, createtime
   </sql>
   <insert id="insertSelective" parameterType="com.fourzeroeight.crm.bean.Logs">
     insert into logs
@@ -19,8 +19,8 @@
       <if test="title != null">
         title,
       </if>
-      <if test="desc != null">
-        desc,
+      <if test="descs != null">
+        descs,
       </if>
       <if test="custid != null">
         custid,
@@ -30,14 +30,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null">
-        #{desc,jdbcType=VARCHAR},
+      <if test="descs != null">
+        #{descs,jdbcType=VARCHAR},
       </if>
       <if test="custid != null">
         #{custid,jdbcType=INTEGER},
@@ -50,8 +47,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.fourzeroeight.crm.bean.Logs">
     update logs
     <set>
-      <if test="desc != null">
-        desc = #{desc,jdbcType=VARCHAR},
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="descs != null">
+        descs = #{descs,jdbcType=VARCHAR},
       </if>
       <if test="custid != null">
         custid = #{custid,jdbcType=INTEGER},

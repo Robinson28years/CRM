@@ -5,15 +5,15 @@ public class Roles {
 
     private String name;
 
-    private String desc;
+    private String descs;
 
     public Roles() {
     }
 
-    public Roles(Integer id, String name, String desc) {
+    public Roles(Integer id, String name, String descs) {
         this.id = id;
         this.name = name;
-        this.desc = desc;
+        this.descs = descs;
     }
 
     public void setId(Integer id) {
@@ -24,10 +24,6 @@ public class Roles {
         this.name = name;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -36,7 +32,11 @@ public class Roles {
         return name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescs() {
+        return descs;
+    }
+
+    public void setDescs(String descs) {
+        this.descs = descs;
     }
 }

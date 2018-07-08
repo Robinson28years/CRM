@@ -3,6 +3,8 @@ package com.fourzeroeight.crm.mapper;
 import com.fourzeroeight.crm.bean.Contacts;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+@Mapper
 public interface ContactsMapper {
     @Delete({
         "delete from contacts",
@@ -58,4 +60,13 @@ public interface ContactsMapper {
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Contacts record);
+
+    @Select({
+            "select",
+            "id, custid, name, dept, position, telephone, mobile, email, qq, degree, moreinfo, ",
+            "createtime, bookid, title",
+            "from contacts"
+    })
+    @ResultMap("BaseResultMap")
+    List<Contacts> select();
 }

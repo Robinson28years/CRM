@@ -5,11 +5,11 @@
     <constructor>
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="desc" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="descs" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, desc
+    id, name, descs
   </sql>
   <insert id="insertSelective" parameterType="com.fourzeroeight.crm.bean.Roles">
     insert into roles
@@ -17,16 +17,16 @@
       <if test="name != null">
         name,
       </if>
-      <if test="desc != null">
-        desc,
+      <if test="descs != null">
+        descs,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null">
-        #{desc,jdbcType=VARCHAR},
+      <if test="descs != null">
+        #{descs,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -36,8 +36,8 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null">
-        desc = #{desc,jdbcType=VARCHAR},
+      <if test="descs != null">
+        descs = #{descs,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}

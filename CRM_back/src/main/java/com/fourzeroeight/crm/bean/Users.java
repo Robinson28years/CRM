@@ -1,5 +1,8 @@
 package com.fourzeroeight.crm.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Users {
@@ -11,13 +14,18 @@ public class Users {
 
     private String sex;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date birthday;
 
     private Integer roleid;
 
     private Integer status;
 
+    private Roles roles;
+
     public Users() {
+
     }
 
     public Users(Integer id, String username, String password, String sex, Date birthday, Integer roleid, Integer status) {
@@ -28,6 +36,14 @@ public class Users {
         this.birthday = birthday;
         this.roleid = roleid;
         this.status = status;
+    }
+
+    public Roles getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Roles roles) {
+        this.roles = roles;
     }
 
     public void setId(Integer id) {

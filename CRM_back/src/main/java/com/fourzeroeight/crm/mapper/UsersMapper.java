@@ -3,6 +3,8 @@ package com.fourzeroeight.crm.mapper;
 import com.fourzeroeight.crm.bean.Users;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+@Mapper
 public interface UsersMapper {
     @Delete({
         "delete from users",
@@ -44,4 +46,21 @@ public interface UsersMapper {
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Users record);
+
+    @Select({
+            "select",
+            "id, username, password, sex, birthday, roleid, status",
+            "from users",
+    })
+    @ResultMap("BaseResultMap")
+    List<Users> select();
+
+    @Select({
+            "select",
+            "id, username, password, sex, birthday, roleid, status",
+            "from users",
+            "where username = #{id,jdbcType=VARCHAR}"
+    })
+    @ResultMap("BaseResultMap")
+    Users selectByUsername(String username);
 }

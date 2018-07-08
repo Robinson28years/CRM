@@ -8,6 +8,7 @@
       <arg column="descs" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="booktime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="custid" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
@@ -28,6 +29,9 @@
       <if test="createtime != null">
         createtime,
       </if>
+      <if test="custid != null">
+        custid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="title != null">
@@ -41,6 +45,9 @@
       </if>
       <if test="createtime != null">
         #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custid != null">
+        #{custid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -58,6 +65,9 @@
       </if>
       <if test="createtime != null">
         createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custid != null">
+        custid = #{custid,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}

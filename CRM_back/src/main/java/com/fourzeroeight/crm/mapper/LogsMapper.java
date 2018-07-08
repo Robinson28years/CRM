@@ -3,6 +3,8 @@ package com.fourzeroeight.crm.mapper;
 import com.fourzeroeight.crm.bean.Logs;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+@Mapper
 public interface LogsMapper {
     @Delete({
         "delete from logs",
@@ -12,9 +14,9 @@ public interface LogsMapper {
 
     @Insert({
         "insert into logs (title, ",
-        "desc, custid, createtime)",
+        "descs, custid, createtime)",
         "values (#{title,jdbcType=VARCHAR}, ",
-        "#{desc,jdbcType=VARCHAR}, #{custid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP})"
+        "#{descs,jdbcType=VARCHAR}, #{custid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP})"
     })
     int insert(Logs record);
 
@@ -22,7 +24,7 @@ public interface LogsMapper {
 
     @Select({
         "select",
-        "id, title, desc, custid, createtime",
+        "id, title, descs, custid, createtime",
         "from logs",
         "where id = #{id,jdbcType=INTEGER}"
     })
@@ -34,10 +36,18 @@ public interface LogsMapper {
     @Update({
         "update logs",
         "set title = #{title,jdbcType=VARCHAR},",
-          "desc = #{desc,jdbcType=VARCHAR},",
+          "descs = #{descs,jdbcType=VARCHAR},",
           "custid = #{custid,jdbcType=INTEGER},",
           "createtime = #{createtime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Logs record);
+
+    @Select({
+            "select",
+            "id, title, descs, custid, createtime",
+            "from logs",
+    })
+    @ResultMap("BaseResultMap")
+    List<Logs> select();
 }

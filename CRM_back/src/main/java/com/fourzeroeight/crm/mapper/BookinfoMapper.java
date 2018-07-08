@@ -15,10 +15,10 @@ public interface BookinfoMapper {
     @Insert({
         "insert into bookinfo (title, ",
         "descs, booktime, ",
-        "createtime)",
+        "createtime, custid)",
         "values (#{title,jdbcType=VARCHAR}, ",
         "#{desc,jdbcType=INTEGER}, #{booktime,jdbcType=TIMESTAMP}, ",
-        "#{createtime,jdbcType=TIMESTAMP})"
+        "#{createtime,jdbcType=TIMESTAMP},#{custid,jdbcType=INTEGER})"
     })
     int insert(Bookinfo record);
 
@@ -26,7 +26,7 @@ public interface BookinfoMapper {
 
     @Select({
         "select",
-        "id, title, descs, booktime, createtime",
+        "id, title, descs, booktime, createtime, custid",
         "from bookinfo",
         "where id = #{id,jdbcType=INTEGER}"
     })
@@ -41,13 +41,14 @@ public interface BookinfoMapper {
           "descs = #{descs,jdbcType=INTEGER},",
           "booktime = #{booktime,jdbcType=TIMESTAMP},",
           "createtime = #{createtime,jdbcType=TIMESTAMP}",
+          "custid = #{custid,jdbcType=INTEGER}",
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Bookinfo record);
 
     @Select({
             "select",
-            "id, title, descs, booktime, createtime",
+            "id, title, descs, booktime, createtime, custid",
             "from bookinfo"
     })
     @ResultMap("BaseResultMap")
