@@ -28,6 +28,16 @@ public class Contacts {
 
     private String moreinfo;
 
+    private Customers cust;
+
+    public Customers getCust() {
+        return cust;
+    }
+
+    public void setCust(Customers cust) {
+        this.cust = cust;
+    }
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createtime;
