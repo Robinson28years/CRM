@@ -17,6 +17,8 @@ import './errorLog'// error log
 import './permission' // permission control
 // import './mock' // simulation data
 
+window.axios = require('axios');
+
 import * as filters from './filters' // global filters
 
 // import VueNativeSock from 'vue-native-websocket'
