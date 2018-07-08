@@ -1,6 +1,6 @@
 package com.fourzeroeight.crm.utils;
 
-import cn.sxito.wcr.bean.Message;
+import com.fourzeroeight.crm.bean.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Base64Utils;
