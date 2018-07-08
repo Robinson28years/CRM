@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/public")
+@RequestMapping("/api")
 public class LoginController {
 
     @Autowired
