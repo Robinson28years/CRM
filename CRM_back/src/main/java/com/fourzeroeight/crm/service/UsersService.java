@@ -1,5 +1,6 @@
 package com.fourzeroeight.crm.service;
 
+import com.fourzeroeight.crm.bean.Message;
 import com.fourzeroeight.crm.bean.Roles;
 import com.fourzeroeight.crm.bean.Users;
 
@@ -16,4 +17,6 @@ public interface UsersService {
     void add(Users logs);
 
     void update(Users logs);
+
+    Message login(Users userInfo);
 }

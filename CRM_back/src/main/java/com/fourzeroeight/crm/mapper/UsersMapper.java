@@ -54,4 +54,13 @@ public interface UsersMapper {
     })
     @ResultMap("BaseResultMap")
     List<Users> select();
+
+    @Select({
+            "select",
+            "id, username, password, sex, birthday, roleid, status",
+            "from users",
+            "where username = #{id,jdbcType=VARCHAR}"
+    })
+    @ResultMap("BaseResultMap")
+    Users selectByUsername(String username);
 }

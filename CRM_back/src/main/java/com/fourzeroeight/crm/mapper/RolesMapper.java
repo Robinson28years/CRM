@@ -14,7 +14,7 @@ public interface RolesMapper {
 
     @Insert({
         "insert into roles (name, ",
-        "desc)",
+        "descs)",
         "values (#{name,jdbcType=VARCHAR}, ",
         "#{desc,jdbcType=VARCHAR})"
     })
@@ -24,7 +24,7 @@ public interface RolesMapper {
 
     @Select({
         "select",
-        "id, name, desc",
+        "id, name, descs",
         "from roles",
         "where id = #{id,jdbcType=INTEGER}"
     })
@@ -36,14 +36,14 @@ public interface RolesMapper {
     @Update({
         "update roles",
         "set name = #{name,jdbcType=VARCHAR},",
-          "desc = #{desc,jdbcType=VARCHAR}",
+          "descs = #{descs,jdbcType=VARCHAR}",
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Roles record);
 
     @Select({
             "select",
-            "id, name, desc",
+            "id, name, descs",
             "from roles",
     })
     @ResultMap("BaseResultMap")

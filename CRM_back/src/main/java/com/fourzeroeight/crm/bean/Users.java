@@ -17,7 +17,10 @@ public class Users {
 
     private Integer status;
 
+    private Roles roles;
+
     public Users() {
+
     }
 
     public Users(Integer id, String username, String password, String sex, Date birthday, Integer roleid, Integer status) {
@@ -28,6 +31,14 @@ public class Users {
         this.birthday = birthday;
         this.roleid = roleid;
         this.status = status;
+    }
+
+    public Roles getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Roles roles) {
+        this.roles = roles;
     }
 
     public void setId(Integer id) {
