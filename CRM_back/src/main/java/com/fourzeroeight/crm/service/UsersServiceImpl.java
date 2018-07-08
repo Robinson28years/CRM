@@ -23,7 +23,11 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public List<Users> getAll() {
-        return mapper.select();
+        List<Users> list = mapper.select();
+        for (Users user : list ) {
+            user.setRoles(rolesMapper.selectByPrimaryKey(user.getRoleid()));
+        }
+        return list;
     }
 
     @Override

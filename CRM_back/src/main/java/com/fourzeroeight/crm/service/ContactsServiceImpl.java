@@ -2,6 +2,7 @@ package com.fourzeroeight.crm.service;
 
 import com.fourzeroeight.crm.bean.Contacts;
 import com.fourzeroeight.crm.mapper.ContactsMapper;
+import com.fourzeroeight.crm.mapper.CustomersMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +13,17 @@ public class ContactsServiceImpl implements ContactsService {
 
     @Autowired
     private ContactsMapper mapper;
+    @Autowired
+    private CustomersMapper customersMapper;
 
     @Override
     public List<Contacts> getAll() {
-        return mapper.select();
+        List<Contacts> list = mapper.select();
+        for (Contacts c:list) {
+            c.setCust(customersMapper.selectByPrimaryKey(c.getCustid()));
+
+        }
+        return list;
     }
 
     @Override
