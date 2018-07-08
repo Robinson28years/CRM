@@ -14,6 +14,8 @@ public class Logs {
 
     private Integer custid;
 
+    private Customers cust;
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createtime;
@@ -27,6 +29,14 @@ public class Logs {
         this.descs = descs;
         this.custid = custid;
         this.createtime = createtime;
+    }
+
+    public Customers getCust() {
+        return cust;
+    }
+
+    public void setCust(Customers cust) {
+        this.cust = cust;
     }
 
     public void setId(Integer id) {

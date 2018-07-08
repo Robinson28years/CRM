@@ -1,6 +1,7 @@
 package com.fourzeroeight.crm.service;
 
 import com.fourzeroeight.crm.bean.Files;
+import com.fourzeroeight.crm.mapper.CustomersMapper;
 import com.fourzeroeight.crm.mapper.FilesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,16 @@ import java.util.List;
 public class FilesServiceImpl implements FilesService {
     @Autowired
     private FilesMapper mapper;
-
+    @Autowired
+    private CustomersMapper customersMapper;
     @Override
     public List<Files> getAll() {
-        return mapper.select();
+        List<Files> list = mapper.select();
+        for (Files b : list) {
+            b.setCust(customersMapper.selectByPrimaryKey(b.getCustid()));
+        }
+        return list;
     }
-
     @Override
     public void delete(int id) {
         mapper.deleteByPrimaryKey(id);

@@ -28,25 +28,25 @@
           <span>{{scope.row.id}}</span>
         </template>
       </el-table-column>
-      <el-table-column width="170px" align="center" :label="$t('table.date')">
+      <el-table-column width="170px" align="center" label="创建日期">
         <template slot-scope="scope">
-          <span>{{scope.row.created_at}}</span>
+          <span>{{scope.row.createtime}}</span>
         </template>
       </el-table-column>
-      <el-table-column min-width="150px" align="center" label="住址">
+      <el-table-column width="150px" align="center" label="标题">
         <template slot-scope="scope">
-          <span class="link-type" @click="handleUpdate(scope.row)">{{scope.row.address.building_id}}幢{{scope.row.address.unit_id}}单元{{scope.row.address.room_id}}</span>
-          <el-tag>金桥文苑</el-tag>
+          <span>{{scope.row.title}}</span>
         </template>
       </el-table-column>
-      <el-table-column width="150px" align="center" label="手机号">
+      <el-table-column min-width="150px" align="center" label="描述">
         <template slot-scope="scope">
-          <span>{{scope.row.phone}}</span>
+          <span class="link-type" @click="handleUpdate(scope.row)">{{scope.row.descs}}</span>
+          <!-- <el-tag>金桥文苑</el-tag> -->
         </template>
       </el-table-column>
-      <el-table-column width="110px" align="center" label="业主">
+      <el-table-column width="170px" align="center" label="预定日期">
         <template slot-scope="scope">
-          <span>{{scope.row.name}}</span>
+          <span>{{scope.row.booktime}}</span>
         </template>
       </el-table-column>
       <el-table-column width="110px" v-if='showReviewer' align="center" :label="$t('table.reviewer')">
@@ -59,11 +59,11 @@
           <svg-icon v-for="n in +scope.row.importance" icon-class="star" class="meta-item__icon" :key="n"></svg-icon>
         </template>
       </el-table-column> -->
-      <el-table-column align="center" label="绑定访客数" width="95">
+      <!-- <el-table-column align="center" label="绑定访客数" width="95">
         <template slot-scope="scope">
           <span class="link-type">{{scope.row.visiter_num}}</span>
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <!-- <el-table-column class-name="status-col" :label="$t('table.status')" width="100">
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | statusFilter">{{scope.row.status}}</el-tag>
@@ -72,8 +72,8 @@
       <el-table-column align="center" :label="$t('table.actions')" width="230" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">{{$t('table.edit')}}</el-button>
-          <el-button v-if="scope.row.status!='published'" size="mini" type="success"  @click="handleModifyStatus(scope.row,'published')">访客记录
-          </el-button>
+          <!-- <el-button v-if="scope.row.status!='published'" size="mini" type="success"  @click="handleModifyStatus(scope.row,'published')">访客记录
+          </el-button> -->
           <!-- <el-button v-if="scope.row.status!='draft'" size="mini" @click="handleModifyStatus(scope.row,'draft')">{{$t('table.draft')}}
           </el-button> -->
           <el-button v-if="scope.row.status!='deleted'" size="mini" type="danger" @click="handleModifyStatus(scope.row,'deleted')">{{$t('table.delete')}}
@@ -341,9 +341,9 @@ export default {
       },
     getList() {
       this.listLoading = true
-      fetchList(this.listQuery).then(response => {
+      axios.post('api/bookinfo/getAll').then(response => {
         //   console.log(response.data.data[0].address.id)
-        this.list = response.data.data
+        this.list = response.data.res
         // this.total = response.data.total
         this.listLoading = false
       })

@@ -1,6 +1,7 @@
 package com.fourzeroeight.crm.service;
 
 import com.fourzeroeight.crm.bean.Logs;
+import com.fourzeroeight.crm.mapper.CustomersMapper;
 import com.fourzeroeight.crm.mapper.LogsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,16 @@ import java.util.List;
 public class LogsServiceImpl implements LogsService {
     @Autowired
     private LogsMapper mapper;
-
+    @Autowired
+    private CustomersMapper customersMapper;
     @Override
     public List<Logs> getAll() {
-        return mapper.select();
+        List<Logs> list = mapper.select();
+        for (Logs b : list) {
+            b.setCust(customersMapper.selectByPrimaryKey(b.getCustid()));
+        }
+        return list;
     }
-
     @Override
     public void delete(int id) {
         mapper.deleteByPrimaryKey(id);

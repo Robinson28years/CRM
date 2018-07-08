@@ -20,5 +20,5 @@ com:
   sxito:
     custom:
       windows-path: d:/sxito
-      linux-path: ~/sxito
+      linux-path: /home/robinson/Documents/test/sxito
       keys: fourzeroeight

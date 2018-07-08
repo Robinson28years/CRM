@@ -89,8 +89,8 @@ export const asyncRouterMap = [
       icon: 'peoples'
     },
     children: [
-      { path: 'add', component: _import('user/add'), name: 'add', meta: { title: '新增用户' ,icon: 'owner'}},
-      { path: 'list', component: _import('user/list'), name: 'list', meta: { title: '管理用户' ,icon: 'property'}},
+      { path: 'add', component: _import('user/add'), name: 'add1', meta: { title: '新增用户' ,icon: 'owner'}},
+      { path: 'list', component: _import('user/list'), name: 'list1', meta: { title: '管理用户' ,icon: 'property'}},
     ]
   },
 
@@ -104,8 +104,8 @@ export const asyncRouterMap = [
       icon: 'customer'
     },
     children: [
-      { path: 'add', component: _import('customer/add'), name: 'add', meta: { title: '新增客户' ,icon: 'owner'}},
-      { path: 'list', component: _import('customer/list'), name: 'list', meta: { title: '管理客户' ,icon: 'property'}},
+      { path: 'add', component: _import('customer/add'), name: 'add2', meta: { title: '新增客户' ,icon: 'owner'}},
+      { path: 'list', component: _import('customer/list'), name: 'list2', meta: { title: '管理客户' ,icon: 'property'}},
     ]
   },
 
@@ -119,8 +119,8 @@ export const asyncRouterMap = [
       icon: 'contact'
     },
     children: [
-      { path: 'add', component: _import('contact/add'), name: 'add', meta: { title: '新增联络' ,icon: 'owner'}},
-      { path: 'list', component: _import('contact/list'), name: 'list', meta: { title: '管理联络' ,icon: 'property'}},
+      { path: 'add', component: _import('contact/add'), name: 'add3', meta: { title: '新增联络' ,icon: 'owner'}},
+      { path: 'list', component: _import('contact/list'), name: 'list3', meta: { title: '管理联络' ,icon: 'property'}},
     ]
   },
 
@@ -134,8 +134,8 @@ export const asyncRouterMap = [
       icon: 'file'
     },
     children: [
-      { path: 'add', component: _import('file/add'), name: 'add', meta: { title: '新增文档' ,icon: 'owner'}},
-      { path: 'list', component: _import('file/list'), name: 'list', meta: { title: '管理文档' ,icon: 'property'}},
+      { path: 'add', component: _import('file/add'), name: 'add4', meta: { title: '新增文档' ,icon: 'owner'}},
+      { path: 'list', component: _import('file/list'), name: 'list4', meta: { title: '管理文档' ,icon: 'property'}},
     ]
   },
 
@@ -149,8 +149,8 @@ export const asyncRouterMap = [
       icon: 'book'
     },
     children: [
-      { path: 'add', component: _import('book/add'), name: 'add', meta: { title: '新增预定' ,icon: 'owner'}},
-      { path: 'list', component: _import('book/list'), name: 'list', meta: { title: '管理预定' ,icon: 'property'}},
+      { path: 'add', component: _import('book/add'), name: 'add5', meta: { title: '新增预定' ,icon: 'owner'}},
+      { path: 'list', component: _import('book/list'), name: 'list5', meta: { title: '管理预定' ,icon: 'property'}},
     ]
   },
 
@@ -164,8 +164,8 @@ export const asyncRouterMap = [
       icon: 'log'
     },
     children: [
-      { path: 'add', component: _import('log/add'), name: 'add', meta: { title: '新增日志' ,icon: 'owner'}},
-      { path: 'list', component: _import('log/list'), name: 'list', meta: { title: '管理日志' ,icon: 'property'}},
+      { path: 'add', component: _import('log/add'), name: 'add6', meta: { title: '新增日志' ,icon: 'owner'}},
+      { path: 'list', component: _import('log/list'), name: 'list6', meta: { title: '管理日志' ,icon: 'property'}},
     ]
   },
   

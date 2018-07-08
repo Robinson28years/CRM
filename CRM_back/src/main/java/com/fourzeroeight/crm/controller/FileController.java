@@ -27,7 +27,7 @@ public class FileController {
         }else{
             Map map = UploadUtil.singleFileUpload(file,save, CommonUtil.getIpAddr(request));
             if((Boolean) map.get("status")){
-                return new Message(1,"保存成功", "http://127.0.0.1:8080/public/download/"+ save + "?filename="+map.get("path"));
+                return new Message(1,"保存成功", "http://127.0.0.1:8080/api/public/download/"+ save + "?filename="+map.get("path"));
             }else{
                 return new Message(0,"保存失败",null);
             }
