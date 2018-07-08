@@ -23,9 +23,11 @@ export default {
     ])
   },
   created() {
-    if (!this.roles.includes('property')) {
-      this.currentRole = 'editorDashboard'
-    }
+    // console.log("sdfasdfsad")
+    // console.log(this.roles)
+    // if (!this.roles.includes('admin')) {
+    //   this.currentRole = 'editorDashboard'
+    // }
   }
 }
 </script>
