@@ -3,6 +3,8 @@ package com.fourzeroeight.crm.mapper;
 import com.fourzeroeight.crm.bean.Roles;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+@Mapper
 public interface RolesMapper {
     @Delete({
         "delete from roles",
@@ -38,4 +40,12 @@ public interface RolesMapper {
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Roles record);
+
+    @Select({
+            "select",
+            "id, name, desc",
+            "from roles",
+    })
+    @ResultMap("BaseResultMap")
+    List<Roles> select();
 }

@@ -3,6 +3,8 @@ package com.fourzeroeight.crm.mapper;
 import com.fourzeroeight.crm.bean.Logs;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+@Mapper
 public interface LogsMapper {
     @Delete({
         "delete from logs",
@@ -40,4 +42,12 @@ public interface LogsMapper {
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Logs record);
+
+    @Select({
+            "select",
+            "id, title, desc, custid, createtime",
+            "from logs",
+    })
+    @ResultMap("BaseResultMap")
+    List<Logs> select();
 }
