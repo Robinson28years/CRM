@@ -257,22 +257,6 @@
     directives: {
       waves
     },
-    mounted() {
-      axios.post('/api/customers/getAll').then(response => {
-        let data = response.data.res
-        let i = 0
-        while (data[i]) {
-          let option = {
-            value: '',
-            label: '',
-          }
-          option.value = data[i].id
-          option.label = data[i].name
-          this.options.push(option)
-          i++
-        }
-      })
-    },
     data() {
       return {
         options:[],
@@ -377,6 +361,23 @@
       }
     },
     created() {
+      // this.getList()
+    },
+    mounted() {
+      axios.post('/api/customers/getAll').then(response => {
+        let data = response.data.res
+        let i = 0
+        while (data[i]) {
+          let option = {
+            value: '',
+            label: '',
+          }
+          option.value = data[i].id
+          option.label = data[i].name
+          this.options.push(option)
+          i++
+        }
+      })
       this.getList()
     },
     methods: {

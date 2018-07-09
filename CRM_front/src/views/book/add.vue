@@ -153,11 +153,11 @@
           }).then(response => {
             this.$notify({
               title: '成功',
-              message: '新增预定成功',
+              message: '新增日志成功',
               type: 'success',
               duration: 3000
             })
-            this.$router.push('/book/list')
+            this.$router.push('/log/list')
             console.log(response.data)
           })
         } else {

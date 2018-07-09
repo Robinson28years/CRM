@@ -551,7 +551,7 @@
             duration: 2000
           })
           this.dialogFormVisible = false
-          this.$router.push('/book/list')
+          this.$router.push('/log/list')
           console.log(response.data)
         })
       },
@@ -588,7 +588,7 @@
         })
         const index = this.list.indexOf(row)
         console.log(index)
-        axios.post('/api/bookinfo/delete?id=' + row.id).then(response => {
+        axios.post('/api/logs/delete?id=' + row.id).then(response => {
 
         })
         this.list.splice(index, 1)
