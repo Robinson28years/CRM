@@ -27,6 +27,12 @@
       <if test="over !=null">
         and birthday &lt;= #{over}
       </if>
+      <if test="t1 !=null">
+        and roleid = #{t1}
+      </if>
+      <if test="s1 !=null and s1 != ''">
+        and sex = #{s1}
+      </if>
     </where>
     ORDER BY ${orderName} ${order},id  LIMIT #{offset},#{limit}
   </select>
@@ -42,6 +48,12 @@
       </if>
       <if test="over !=null">
         and birthday &lt;= #{over}
+      </if>
+      <if test="t1 !=null">
+        and roleid = #{t1}
+      </if>
+      <if test="s1 !=null and s1 != ''">
+        and sex = #{s1}
       </if>
     </where>
   </select>
