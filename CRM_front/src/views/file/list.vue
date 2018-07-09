@@ -9,6 +9,15 @@
         <el-option label="订单" value="订单"></el-option>
         <el-option label="合同" value="合同"></el-option>
       </el-select>
+      <el-select @change='handleFilter' style="width: 110px" class="filter-item" v-model="listQuery.orderName" placeholder="查询字段">
+        <el-option label="序号" value="id"></el-option>
+        <el-option label="创建日期" value="createtime"></el-option>
+        <!-- <el-option label="性别" value="sex"></el-option> -->
+      </el-select>
+      <el-select @change='handleFilter' style="width: 120px" class="filter-item" v-model="listQuery.order">
+        <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key">
+        </el-option>
+      </el-select>
       <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">{{$t('table.search')}}</el-button>
       <el-button class="filter-item" style="margin-left: 10px;" @click="handleCreate" type="primary" icon="el-icon-edit">{{$t('table.add')}}</el-button>
       <el-button class="filter-item" type="primary" :loading="downloadLoading" v-waves icon="el-icon-download" @click="handleDownload">{{$t('table.export')}}</el-button>
@@ -265,7 +274,7 @@
     },
     data() {
       return {
-        options:[],
+        options: [],
         fileList: [],
         form: '',
         uploadUrl: baseURL + "/face/upload",
@@ -462,10 +471,10 @@
         axios.post('api/files/getAllSelect', this.listQuery).then(response => {
           //   console.log(response.data.data[0].address.id)
           this.list = response.data.res.object
-          if(response.data.res.total % this.listQuery.limit !=0)
-          this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit) + 1
-          else 
-          this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit)
+          if (response.data.res.total % this.listQuery.limit != 0)
+            this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit) + 1
+          else
+            this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit)
           // this.total = response.data.total
           this.listLoading = false
         })

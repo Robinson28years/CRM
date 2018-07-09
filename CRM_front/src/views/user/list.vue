@@ -11,7 +11,12 @@
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
         </el-option>
       </el-select>
-      <el-select @change='handleFilter' style="width: 140px" class="filter-item" v-model="listQuery.order">
+      <el-select @change='handleFilter' style="width: 110px" class="filter-item" v-model="listQuery.orderName" placeholder="查询字段">
+        <el-option label="序号" value="id"></el-option>
+        <el-option label="出生日期" value="birthday"></el-option>
+        <el-option label="性别" value="sex"></el-option>
+      </el-select>
+      <el-select @change='handleFilter' style="width: 120px" class="filter-item" v-model="listQuery.order">
         <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key">
         </el-option>
       </el-select>
@@ -453,10 +458,10 @@
           //   console.log(response.data.data[0].address.id)
           this.list = response.data.res.object
           console.log(response.data.res.total / this.listQuery.limit)
-          if(response.data.res.total % this.listQuery.limit !=0)
-          this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit) + 1
-          else 
-          this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit)
+          if (response.data.res.total % this.listQuery.limit != 0)
+            this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit) + 1
+          else
+            this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit)
           // this.total = response.data.total
           this.listLoading = false
         })

@@ -14,7 +14,12 @@
         <el-option label="放弃客户" value="3"></el-option>
         <el-option label="签约客户" value="4"></el-option>
       </el-select>
-      <el-select @change='handleFilter' style="width: 140px" class="filter-item" v-model="listQuery.order">
+      <el-select @change='handleFilter' style="width: 110px" class="filter-item" v-model="listQuery.orderName" placeholder="查询字段">
+        <el-option label="序号" value="id"></el-option>
+        <el-option label="创建日期" value="createtime"></el-option>
+        <el-option label="公司规模" value="scale"></el-option>
+      </el-select>
+      <el-select @change='handleFilter' style="width: 120px" class="filter-item" v-model="listQuery.order">
         <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key">
         </el-option>
       </el-select>
