@@ -6,7 +6,7 @@
           <svg-icon icon-class="peoples" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">已注册业主</div>
+          <div class="card-panel-text">已注册用户</div>
           <count-to class="card-panel-num" :startVal="0" :endVal="2400" :duration="2600"></count-to>
         </div>
       </div>
@@ -28,7 +28,7 @@
           <svg-icon icon-class="bug" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">门禁异常</div>
+          <div class="card-panel-text">异常</div>
           <count-to class="card-panel-num" :startVal="0" :endVal="11" :duration="3200"></count-to>
         </div>
       </div>
@@ -39,7 +39,7 @@
           <svg-icon icon-class="visiter3" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">进出次数</div>
+          <div class="card-panel-text">访问次数</div>
           <count-to class="card-panel-num" :startVal="0" :endVal="4621" :duration="3600"></count-to>
         </div>
       </div>

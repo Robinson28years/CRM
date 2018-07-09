@@ -117,7 +117,7 @@
           <el-row>
             <el-col :span="12">
               <el-form-item label="公司背景">
-                <el-select v-model="form.back" placeholder="请选择公司背景">
+                <el-select v-model="form.background" placeholder="请选择公司背景">
                   <el-option label="民营" value="1"></el-option>
                   <el-option label="国营" value="2"></el-option>
                   <el-option label="合资" value="3"></el-option>
@@ -153,7 +153,7 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="测试人员">
-                <el-input v-model="form.no"></el-input>
+                <el-input v-model="form.tester"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -165,7 +165,7 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="邮政编码">
-                <el-input v-model="form.code"></el-input>
+                <el-input v-model="form.zipcode"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -191,7 +191,7 @@
           <el-row>
             <el-col :span="12">
               <el-form-item label="客户状态">
-                <el-select v-model="form.status" placeholder="请选择客户状态">
+                <el-select v-model="form.newcolumn1" placeholder="请选择客户状态">
                   <el-option label="潜在客户" value="1"></el-option>
                   <el-option label="正式客户" value="2"></el-option>
                   <el-option label="放弃客户" value="3"></el-option>
@@ -208,7 +208,7 @@
           <el-row>
             <el-col :span="12">
               <el-form-item label="创建时间">
-                <el-date-picker type="datetime" placeholder="选择日期" v-model="form.date" style="width: 100%;"></el-date-picker>
+                <el-date-picker type="datetime" placeholder="选择日期" v-model="form.createtime" style="width: 100%;"></el-date-picker>
               </el-form-item>
             </el-col>
           </el-row>

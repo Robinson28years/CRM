@@ -56,7 +56,7 @@ export default {
         legend: {
           left: 'center',
           bottom: '10',
-          data: ['业主', '暂行', '未注册人员', '家人', '亲戚']
+          data: ['潜在客户', '正式客户', '放弃客户', '签约客户', '普通客户']
         },
         calculable: true,
         series: [
@@ -67,11 +67,11 @@ export default {
             radius: [15, 95],
             center: ['50%', '38%'],
             data: [
-              { value: 320, name: '业主' },
-              { value: 240, name: '暂行' },
-              { value: 149, name: '未注册人员' },
-              { value: 100, name: '家人' },
-              { value: 59, name: '亲戚' }
+              { value: 320, name: '潜在客户' },
+              { value: 240, name: '正式客户' },
+              { value: 149, name: '放弃客户' },
+              { value: 100, name: '签约客户' },
+              { value: 59, name: '普通客户' }
             ],
             animationEasing: 'cubicInOut',
             animationDuration: 2600

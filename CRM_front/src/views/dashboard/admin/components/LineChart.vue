@@ -101,10 +101,10 @@ export default {
           }
         },
         legend: {
-          data: ['未成功进入', '进入']
+          data: ['潜在客户', '签约客户']
         },
         series: [{
-          name: '未成功进入', itemStyle: {
+          name: '潜在客户', itemStyle: {
             normal: {
               color: '#FF005A',
               lineStyle: {
@@ -120,7 +120,7 @@ export default {
           animationEasing: 'cubicInOut'
         },
         {
-          name: '进入',
+          name: '签约客户',
           smooth: true,
           type: 'line',
           itemStyle: {
