@@ -510,6 +510,10 @@
       },
       getList() {
         this.listLoading = true
+        if (this.listQuery.start != null) {
+          this.listQuery.start = util.parseTime(this.listQuery.start)
+          this.listQuery.over = util.parseTime(this.listQuery.over)
+        }
         axios.post('api/customers/getAllSelect',this.listQuery).then(response => {
           //   console.log(response.data.data[0].address.id)
           this.list = response.data.res.object
@@ -604,11 +608,11 @@
           "products": this.form.products,
           "services": this.form.services,
           "userid": this.form.userid,
-          "newcolumn1": this.form.status,
+          "newcolumn1": this.form.newcolumn1,
           "background": this.form.back,
           "capital": this.form.capital,
           "listed": this.form.listed,
-          "createtime": util.parseTime(this.form.date)
+          "createtime": util.parseTime(this.form.createtime)
           // "createtime": this.ruleForm2.name,
         }).then(response => {
           this.$notify({
