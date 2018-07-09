@@ -16,7 +16,6 @@
       </el-form-item>
       <el-form-item label="出生日期" prop="date">
         <div class="block">
-          <!-- <span class="demonstration">默认</span> -->
           <el-date-picker v-model="ruleForm2.date" type="datetime" placeholder="选择日期">
           </el-date-picker>
         </div>
