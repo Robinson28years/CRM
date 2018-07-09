@@ -1,6 +1,8 @@
 package com.fourzeroeight.crm.mapper;
 
 import com.fourzeroeight.crm.bean.Logs;
+import com.fourzeroeight.crm.bean.Roles;
+import com.fourzeroeight.crm.bean.Search;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -50,4 +52,8 @@ public interface LogsMapper {
     })
     @ResultMap("BaseResultMap")
     List<Logs> select();
+
+    List<Logs> getListBySearch(Search search);
+
+    int getCountBySearch(Search search);
 }

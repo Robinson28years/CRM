@@ -2,6 +2,7 @@ package com.fourzeroeight.crm.service;
 
 import com.fourzeroeight.crm.bean.Message;
 import com.fourzeroeight.crm.bean.Roles;
+import com.fourzeroeight.crm.bean.Search;
 import com.fourzeroeight.crm.bean.Users;
 import com.fourzeroeight.crm.mapper.RolesMapper;
 import com.fourzeroeight.crm.mapper.UsersMapper;
@@ -29,7 +30,16 @@ public class UsersServiceImpl implements UsersService {
         }
         return list;
     }
-
+    @Override
+    public Search getAllSelect(Search search) {
+        List<Users> list = mapper.getListBySearch(search);
+        for (Users b : list) {
+            b.setRoles(rolesMapper.selectByPrimaryKey(b.getRoleid()));
+        }
+        search.setObject(list);
+        search.setTotal(mapper.getCountBySearch(search));
+        return search;
+    }
     @Override
     public void delete(int id) {
         mapper.deleteByPrimaryKey(id);

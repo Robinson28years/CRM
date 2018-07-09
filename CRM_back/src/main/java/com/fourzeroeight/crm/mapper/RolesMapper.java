@@ -1,6 +1,7 @@
 package com.fourzeroeight.crm.mapper;
 
 import com.fourzeroeight.crm.bean.Roles;
+import com.fourzeroeight.crm.bean.Search;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -48,4 +49,8 @@ public interface RolesMapper {
     })
     @ResultMap("BaseResultMap")
     List<Roles> select();
+
+    List<Roles> getListBySearch(Search search);
+
+    int getCountBySearch(Search search);
 }

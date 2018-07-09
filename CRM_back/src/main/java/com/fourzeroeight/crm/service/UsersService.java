@@ -2,6 +2,7 @@ package com.fourzeroeight.crm.service;
 
 import com.fourzeroeight.crm.bean.Message;
 import com.fourzeroeight.crm.bean.Roles;
+import com.fourzeroeight.crm.bean.Search;
 import com.fourzeroeight.crm.bean.Users;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface UsersService {
     void update(Users logs);
 
     Message login(Users userInfo);
+
+    Search getAllSelect(Search search);
 }

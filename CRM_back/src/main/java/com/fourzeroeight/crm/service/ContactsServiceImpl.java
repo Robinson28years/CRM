@@ -1,6 +1,7 @@
 package com.fourzeroeight.crm.service;
 
 import com.fourzeroeight.crm.bean.Contacts;
+import com.fourzeroeight.crm.bean.Search;
 import com.fourzeroeight.crm.mapper.ContactsMapper;
 import com.fourzeroeight.crm.mapper.CustomersMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,18 @@ public class ContactsServiceImpl implements ContactsService {
         }
         return list;
     }
+
+    @Override
+    public Search getAllSelect(Search search) {
+        List<Contacts> list = mapper.getListBySearch(search);
+        for (Contacts b : list) {
+            b.setCust(customersMapper.selectByPrimaryKey(b.getCustid()));
+        }
+        search.setObject(list);
+        search.setTotal(mapper.getCountBySearch(search));
+        return search;
+    }
+
 
     @Override
     public void delete(int id) {

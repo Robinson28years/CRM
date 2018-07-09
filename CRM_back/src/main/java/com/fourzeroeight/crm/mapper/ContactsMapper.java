@@ -1,6 +1,7 @@
 package com.fourzeroeight.crm.mapper;
 
 import com.fourzeroeight.crm.bean.Contacts;
+import com.fourzeroeight.crm.bean.Search;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -69,4 +70,8 @@ public interface ContactsMapper {
     })
     @ResultMap("BaseResultMap")
     List<Contacts> select();
+
+    List<Contacts> getListBySearch(Search search);
+
+    int getCountBySearch(Search search);
 }

@@ -1,6 +1,7 @@
 package com.fourzeroeight.crm.mapper;
 
 import com.fourzeroeight.crm.bean.Bookinfo;
+import com.fourzeroeight.crm.bean.Search;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -53,4 +54,8 @@ public interface BookinfoMapper {
     })
     @ResultMap("BaseResultMap")
     List<Bookinfo> select();
+
+    List<Bookinfo> getListBySearch(Search search);
+
+    int getCountBySearch(Search search);
 }

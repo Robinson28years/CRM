@@ -1,8 +1,7 @@
 package com.fourzeroeight.crm.service;
 
-import com.fourzeroeight.crm.bean.Logs;
 import com.fourzeroeight.crm.bean.Roles;
-import com.fourzeroeight.crm.mapper.LogsMapper;
+import com.fourzeroeight.crm.bean.Search;
 import com.fourzeroeight.crm.mapper.RolesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,14 @@ public class RolesServiceImpl implements RolesService {
     public List<Roles> getAll() {
         return mapper.select();
     }
+    @Override
+    public Search getAllSelect(Search search) {
+        List<Roles> list = mapper.getListBySearch(search);
 
+        search.setObject(list);
+        search.setTotal(mapper.getCountBySearch(search));
+        return search;
+    }
     @Override
     public void delete(int id) {
         mapper.deleteByPrimaryKey(id);

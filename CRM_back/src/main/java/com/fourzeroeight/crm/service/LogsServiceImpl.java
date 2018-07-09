@@ -1,6 +1,7 @@
 package com.fourzeroeight.crm.service;
 
 import com.fourzeroeight.crm.bean.Logs;
+import com.fourzeroeight.crm.bean.Search;
 import com.fourzeroeight.crm.mapper.CustomersMapper;
 import com.fourzeroeight.crm.mapper.LogsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,16 @@ public class LogsServiceImpl implements LogsService {
             b.setCust(customersMapper.selectByPrimaryKey(b.getCustid()));
         }
         return list;
+    }
+    @Override
+    public Search getAllSelect(Search search) {
+        List<Logs> list = mapper.getListBySearch(search);
+        for (Logs b : list) {
+            b.setCust(customersMapper.selectByPrimaryKey(b.getCustid()));
+        }
+        search.setObject(list);
+        search.setTotal(mapper.getCountBySearch(search));
+        return search;
     }
     @Override
     public void delete(int id) {

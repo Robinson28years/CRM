@@ -16,6 +16,36 @@
   <sql id="Base_Column_List">
     id, url, name, title, descs, type, createtime, custid
   </sql>
+  <select id="getListBySearch" parameterType="com.fourzeroeight.crm.bean.Search" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from files
+    <where>
+      <if test="search !=null and search != ''">
+        and ${searchName} like CONCAT('%', #{search}, '%')
+      </if>
+      <if test="start !=null">
+        and createtime &gt;= #{start}
+      </if>
+      <if test="over !=null">
+        and createtime &lt;= #{over}
+      </if>
+    </where>
+    ORDER BY ${orderName} ${order},id  LIMIT #{offset},#{limit}
+  </select>
+
+  <select id="getCountBySearch" parameterType="com.fourzeroeight.crm.bean.Search" resultType="int">
+    select count(1) from files
+    <where>
+      <if test="search !=null and search != ''">
+        and ${searchName} like CONCAT('%', #{search}, '%')
+      </if>
+      <if test="start !=null">
+        and createtime &gt;= #{start}
+      </if>
+      <if test="over !=null">
+        and createtime &lt;= #{over}
+      </if>
+    </where>
+  </select>
   <insert id="insertSelective" parameterType="com.fourzeroeight.crm.bean.Files">
     insert into files
     <trim prefix="(" suffix=")" suffixOverrides=",">

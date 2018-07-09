@@ -2,6 +2,7 @@ package com.fourzeroeight.crm.controller;
 
 import com.fourzeroeight.crm.bean.Customers;
 import com.fourzeroeight.crm.bean.Message;
+import com.fourzeroeight.crm.bean.Search;
 import com.fourzeroeight.crm.service.CustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,12 @@ public class CustomersController {
 
     @Autowired
     private CustomersService service;
+
+
+    @RequestMapping("getAllSelect")
+    public Message getAllSelect(@RequestBody Search search){
+        return new Message(1,null,service.getAllSelect(search));
+    }
 
     @RequestMapping("getAll")
     public Message getAll(){

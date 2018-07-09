@@ -1,6 +1,7 @@
 package com.fourzeroeight.crm.mapper;
 
 import com.fourzeroeight.crm.bean.Files;
+import com.fourzeroeight.crm.bean.Search;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -58,4 +59,8 @@ public interface FilesMapper {
     })
     @ResultMap("BaseResultMap")
     List<Files> select();
+
+    List<Files> getListBySearch(Search search);
+
+    int getCountBySearch(Search search);
 }

@@ -1,6 +1,7 @@
 package com.fourzeroeight.crm.service;
 
 import com.fourzeroeight.crm.bean.Files;
+import com.fourzeroeight.crm.bean.Search;
 
 import java.util.List;
 
@@ -15,4 +16,7 @@ public interface FilesService {
     void add(Files files);
 
     void update(Files files);
+
+
+    Search getAllSelect(Search search);
 }
