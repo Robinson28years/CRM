@@ -20,7 +20,18 @@
       <if test="search !=null and search != ''">
         and ${searchName} like CONCAT('%', #{search}, '%')
       </if>
-
+      <if test="start !=null">
+        and createtime &gt;= #{start}
+      </if>
+      <if test="over !=null">
+        and createtime &lt;= #{over}
+      </if>
+      <if test="bookstart !=null">
+        and booktime &gt;= #{bookstart}
+      </if>
+      <if test="bookover !=null">
+        and booktime &lt;= #{bookover}
+      </if>
     </where>
     ORDER BY ${orderName} ${order},id  LIMIT #{offset},#{limit}
   </select>
@@ -30,6 +41,18 @@
     <where>
       <if test="search !=null and search != ''">
         and ${searchName} like CONCAT('%', #{search}, '%')
+      </if>
+      <if test="start !=null">
+        and createtime &gt;= #{start}
+      </if>
+      <if test="over !=null">
+        and createtime &lt;= #{over}
+      </if>
+      <if test="bookstart !=null">
+        and booktime &gt;= #{bookstart}
+      </if>
+      <if test="bookover !=null">
+        and booktime &lt;= #{bookover}
       </if>
     </where>
   </select>

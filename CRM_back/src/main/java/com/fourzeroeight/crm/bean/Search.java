@@ -1,5 +1,10 @@
 package com.fourzeroeight.crm.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class Search {
     private int t1;
     private int t2;
@@ -19,8 +24,53 @@ public class Search {
     private String search;
     private String searchName;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date start;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date over;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date bookstart;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date bookover;
 
     private Object object;
+
+    public Date getBookstart() {
+        return bookstart;
+    }
+
+    public void setBookstart(Date bookstart) {
+        this.bookstart = bookstart;
+    }
+
+    public Date getBookover() {
+        return bookover;
+    }
+
+    public void setBookover(Date bookover) {
+        this.bookover = bookover;
+    }
+
+    public Date getOver() {
+        return over;
+    }
+
+    public void setOver(Date over) {
+        this.over = over;
+    }
+
+    public Date getStart() {
+
+        return start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
 
     public int getT1() {
         return t1;

@@ -21,7 +21,12 @@
       <if test="search !=null and search != ''">
         and ${searchName} like CONCAT('%', #{search}, '%')
       </if>
-
+      <if test="start !=null">
+        and birthday &gt;= #{start}
+      </if>
+      <if test="over !=null">
+        and birthday &lt;= #{over}
+      </if>
     </where>
     ORDER BY ${orderName} ${order},id  LIMIT #{offset},#{limit}
   </select>
@@ -31,6 +36,12 @@
     <where>
       <if test="search !=null and search != ''">
         and ${searchName} like CONCAT('%', #{search}, '%')
+      </if>
+      <if test="start !=null">
+        and birthday &gt;= #{start}
+      </if>
+      <if test="over !=null">
+        and birthday &lt;= #{over}
       </if>
     </where>
   </select>
