@@ -33,7 +33,7 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="是否上市">
-            <el-select v-model="form.listed" placeholder="请选择活动区域">
+            <el-select v-model="form.listed" placeholder="请选择是否上市">
               <el-option label="是" value="1"></el-option>
               <el-option label="否" value="0"></el-option>
             </el-select>

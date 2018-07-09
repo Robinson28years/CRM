@@ -1,28 +1,36 @@
 <template>
   <div class="app-container calendar-list-container">
     <div class="filter-container">
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="住址" v-model="listQuery.title">
+      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="客户名称" v-model="listQuery.search">
       </el-input>
-      <el-select clearable style="width: 90px" class="filter-item" v-model="listQuery.importance" placeholder="楼幢">
-        <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item">
-        </el-option>
-      </el-select>
-      <!-- <el-select clearable class="filter-item" style="width: 130px" v-model="listQuery.type" :placeholder="$t('table.type')">
-        <el-option v-for="item in  calendarTypeOptions" :key="item.key" :label="item.display_name+'('+item.key+')'" :value="item.key">
-        </el-option>
-      </el-select> -->
-      <el-select @change='handleFilter' style="width: 140px" class="filter-item" v-model="listQuery.sort">
-        <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key">
-        </el-option>
+      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="标题" v-model="listQuery.s1">
+      </el-input>
+      <el-select clearable style="width: 110px" class="filter-item" v-model="listQuery.s2" placeholder="文档类型">
+        <el-option label="订单" value="订单"></el-option>
+        <el-option label="合同" value="合同"></el-option>
       </el-select>
       <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">{{$t('table.search')}}</el-button>
       <el-button class="filter-item" style="margin-left: 10px;" @click="handleCreate" type="primary" icon="el-icon-edit">{{$t('table.add')}}</el-button>
       <el-button class="filter-item" type="primary" :loading="downloadLoading" v-waves icon="el-icon-download" @click="handleDownload">{{$t('table.export')}}</el-button>
       <el-checkbox class="filter-item" style='margin-left:15px;' @change='tableKey=tableKey+1' v-model="showReviewer">{{$t('table.reviewer')}}</el-checkbox>
     </div>
+    <el-row>
+      <el-col :span="4">
+        <div class="block">
+          <el-date-picker v-model="listQuery.start" type="datetime" placeholder="起始日期">
+          </el-date-picker>
+        </div>
+      </el-col>
+      <el-col :span="4">
+        <div class="block">
+          <el-date-picker v-model="listQuery.over" type="datetime" placeholder="结束日期">
+          </el-date-picker>
+        </div>
+      </el-col>
+    </el-row>
 
     <el-table :key='tableKey' :data="list" v-loading="listLoading" element-loading-text="给我一点时间" border fit highlight-current-row
-      style="width: 100%">
+      style="width: 100%;margin-top:2%;">
       <el-table-column align="center" :label="$t('table.id')" width="65">
         <template slot-scope="scope">
           <span>{{scope.row.id}}</span>
@@ -72,7 +80,7 @@
       <el-table-column align="center" :label="$t('table.actions')" width="230" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">{{$t('table.edit')}}</el-button>
-          <el-button v-if="scope.row.status!='published'" size="mini" type="success"  @click="handleDon(scope.row)">下载文件
+          <el-button v-if="scope.row.status!='published'" size="mini" type="success" @click="handleDon(scope.row)">下载文件
           </el-button>
           <!-- <el-button v-if="scope.row.status!='draft'" size="mini" @click="handleModifyStatus(scope.row,'draft')">{{$t('table.draft')}}
           </el-button> -->
@@ -84,7 +92,8 @@
 
     <div class="pagination-container">
       <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page"
-        :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
+        :page-sizes="[5,10,20,30, 50]" :page-count="listQuery.total" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
       </el-pagination>
     </div>
 
@@ -257,7 +266,7 @@
     data() {
       return {
         fileList: [],
-        form:'',
+        form: '',
         uploadUrl: baseURL + "/face/upload",
         imageUrl: '',
         active: 1,
@@ -266,13 +275,22 @@
         total: null,
         listLoading: true,
         listQuery: {
-          page: 1,
-          limit: 20,
-          importance: undefined,
-          title: undefined,
-          type: undefined,
-          type2: undefined,
-          sort: '+id'
+          "t1": null,
+          "t2": 0,
+          "t3": 0,
+          "s1": null,
+          "s2": null,
+          "s3": null,
+          "total": 100,
+          "limit": 5,
+          "page": 1,
+          "offset": 0,
+          "search": "",
+          "searchName": "username",
+          "order": "ASC",
+          "orderName": "id",
+          "start": null,
+          "over": null,
         },
         importanceOptions: [1, 2, 3],
         // calendarTypeOptions,
@@ -280,10 +298,10 @@
         units,
         sortOptions: [{
           label: '正序',
-          key: '+id'
+          key: 'ASC'
         }, {
           label: '逆序',
-          key: '-id'
+          key: 'DESC'
         }],
         statusOptions: ['published', 'draft', 'deleted'],
         showReviewer: false,
@@ -420,23 +438,31 @@
       },
       getList() {
         this.listLoading = true
-        axios.post('api/files/getAll').then(response => {
+        if (this.listQuery.start != null) {
+          this.listQuery.start = util.parseTime(this.listQuery.start)
+          this.listQuery.over = util.parseTime(this.listQuery.over)
+        }
+        axios.post('api/files/getAllSelect', this.listQuery).then(response => {
           //   console.log(response.data.data[0].address.id)
-          this.list = response.data.res
+          this.list = response.data.res.object
+          this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit) + 1
           // this.total = response.data.total
           this.listLoading = false
         })
       },
       handleFilter() {
         this.listQuery.page = 1
+        // this.listQuery.order = listQuery.order
         this.getList()
       },
       handleSizeChange(val) {
-        this.listQuery.limit = val
+        this.listQuery.limit = val;
         this.getList()
       },
       handleCurrentChange(val) {
-        this.listQuery.page = val
+        this.listQuery.page = val;
+        this.listQuery.offset = (val - 1) * this.listQuery.limit;
+        console.log(JSON.stringify(this.listQuery))
         this.getList()
       },
       handleModifyStatus(row, status) {
@@ -483,7 +509,7 @@
           }
         })
       },
-      handleDon(row){
+      handleDon(row) {
         window.open(row.url)
       },
       handleUpdate(row) {
