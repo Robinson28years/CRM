@@ -17,7 +17,14 @@
     select <include refid="Base_Column_List" /> from logs
     <where>
       <if test="search !=null and search != ''">
-        and ${searchName} like CONCAT('%', #{search}, '%')
+        <choose>
+          <when test="searchName !='custname'">
+            and ${searchName} like CONCAT('%', #{search}, '%')
+          </when>
+          <otherwise>
+            and custid in (select id from customers where name like CONCAT('%', #{search}, '%'))
+          </otherwise>
+        </choose>
       </if>
       <if test="start !=null">
         and createtime &gt;= #{start}
@@ -33,7 +40,14 @@
     select count(1) from logs
     <where>
       <if test="search !=null and search != ''">
-        and ${searchName} like CONCAT('%', #{search}, '%')
+        <choose>
+          <when test="searchName !='custname'">
+            and ${searchName} like CONCAT('%', #{search}, '%')
+          </when>
+          <otherwise>
+            and custid in (select id from customers where name like CONCAT('%', #{search}, '%'))
+          </otherwise>
+        </choose>
       </if>
       <if test="start !=null">
         and createtime &gt;= #{start}
