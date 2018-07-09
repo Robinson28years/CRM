@@ -39,6 +39,12 @@
         <if test="over !=null">
           and createtime &lt;= #{over}
         </if>
+        <if test="t1 !=null">
+          and background = #{t1}
+        </if>
+        <if test="t2 !=null">
+          and newcolumn1 = #{t2}
+        </if>
       </where>
     ORDER BY ${orderName} ${order},id  LIMIT #{offset},#{limit}
   </select>
@@ -54,6 +60,12 @@
       </if>
       <if test="over !=null">
         and createtime &lt;= #{over}
+      </if>
+      <if test="t1 !=null">
+        and background = #{t1}
+      </if>
+      <if test="t2 !=null">
+        and newcolumn1 = #{t2}
       </if>
     </where>
   </select>
