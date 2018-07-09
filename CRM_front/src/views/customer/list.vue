@@ -1,17 +1,20 @@
 <template>
   <div class="app-container calendar-list-container">
     <div class="filter-container">
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="住址" v-model="listQuery.title">
+      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="客户名称" v-model="listQuery.search">
       </el-input>
-      <el-select clearable style="width: 90px" class="filter-item" v-model="listQuery.importance" placeholder="楼幢">
-        <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item">
-        </el-option>
+      <el-select clearable style="width: 90px" class="filter-item" v-model="listQuery.t1" placeholder="背景">
+        <el-option label="民营" value="1"></el-option>
+        <el-option label="国营" value="2"></el-option>
+        <el-option label="合资" value="3"></el-option>
       </el-select>
-      <!-- <el-select clearable class="filter-item" style="width: 130px" v-model="listQuery.type" :placeholder="$t('table.type')">
-        <el-option v-for="item in  calendarTypeOptions" :key="item.key" :label="item.display_name+'('+item.key+')'" :value="item.key">
-        </el-option>
-      </el-select> -->
-      <el-select @change='handleFilter' style="width: 140px" class="filter-item" v-model="listQuery.sort">
+      <el-select clearable style="width: 90px" class="filter-item" v-model="listQuery.t2" placeholder="状态">
+        <el-option label="潜在客户" value="1"></el-option>
+        <el-option label="正式客户" value="2"></el-option>
+        <el-option label="放弃客户" value="3"></el-option>
+        <el-option label="签约客户" value="4"></el-option>
+      </el-select>
+      <el-select @change='handleFilter' style="width: 140px" class="filter-item" v-model="listQuery.order">
         <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key">
         </el-option>
       </el-select>
@@ -87,7 +90,8 @@
 
     <div class="pagination-container">
       <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page"
-        :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
+        :page-sizes="[5,10,20,30, 50]" :page-count="listQuery.total" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
       </el-pagination>
     </div>
 
@@ -323,6 +327,17 @@
     },
     data() {
       return {
+        options: [{
+          value: '1',
+          label: '管理员'
+        }, {
+          value: '2',
+          label: '销售'
+        }, {
+          value: '3',
+          label: '业务经理'
+        }],
+
         uploadUrl: baseURL + "/face/upload",
         form: '',
         imageUrl: '',
@@ -332,24 +347,33 @@
         total: null,
         listLoading: true,
         listQuery: {
-          page: 1,
-          limit: 20,
-          importance: undefined,
-          title: undefined,
-          type: undefined,
-          type2: undefined,
-          sort: '+id'
+          "t1": null,
+          "t2": null,
+          "t3": null,
+          "s1": null,
+          "s2": null,
+          "s3": null,
+          "total": 100,
+          "limit": 5,
+          "page": 1,
+          "offset": 0,
+          "search": "",
+          "searchName": "name",
+          "order": "ASC",
+          "orderName": "id",
+          "start": null,
+          "over": null,
         },
         importanceOptions: [1, 2, 3],
         // calendarTypeOptions,
         buildings,
         units,
-        sortOptions: [{
+                sortOptions: [{
           label: '正序',
-          key: '+id'
+          key: 'ASC'
         }, {
           label: '逆序',
-          key: '-id'
+          key: 'DESC'
         }],
         statusOptions: ['published', 'draft', 'deleted'],
         showReviewer: false,
@@ -486,23 +510,27 @@
       },
       getList() {
         this.listLoading = true
-        axios.post('api/customers/getAll').then(response => {
+        axios.post('api/customers/getAllSelect',this.listQuery).then(response => {
           //   console.log(response.data.data[0].address.id)
-          this.list = response.data.res
+          this.list = response.data.res.object
+          this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit) + 1
           // this.total = response.data.total
           this.listLoading = false
         })
       },
       handleFilter() {
         this.listQuery.page = 1
+        // this.listQuery.order = listQuery.order
         this.getList()
       },
       handleSizeChange(val) {
-        this.listQuery.limit = val
+        this.listQuery.limit = val;
         this.getList()
       },
       handleCurrentChange(val) {
-        this.listQuery.page = val
+        this.listQuery.page = val;
+        this.listQuery.offset = (val - 1) * this.listQuery.limit;
+        console.log(JSON.stringify(this.listQuery))
         this.getList()
       },
       handleModifyStatus(row, status) {
