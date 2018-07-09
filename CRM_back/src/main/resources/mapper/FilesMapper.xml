@@ -39,7 +39,7 @@
         and title like CONCAT('%', #{s1}, '%')
       </if>
       <if test="s2 !=null">
-        and createtime = #{s2}
+        and type = #{s2}
       </if>
     </where>
     ORDER BY ${orderName} ${order},id  LIMIT #{offset},#{limit}
@@ -68,7 +68,7 @@
         and title like CONCAT('%', #{s1}, '%')
       </if>
       <if test="s2 !=null">
-        and createtime = #{s2}
+        and type = #{s2}
       </if>
     </where>
   </select>
