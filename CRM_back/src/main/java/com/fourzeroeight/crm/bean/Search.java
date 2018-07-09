@@ -6,9 +6,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public class Search {
-    private int t1;
-    private int t2;
-    private int t3;
+    private Integer t1;
+    private Integer t2;
+    private Integer t3;
     private String s1;
     private String s2;
     private String s3;
@@ -30,6 +30,7 @@ public class Search {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date over;
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date bookstart;
@@ -39,60 +40,27 @@ public class Search {
 
     private Object object;
 
-    public Date getBookstart() {
-        return bookstart;
-    }
-
-    public void setBookstart(Date bookstart) {
-        this.bookstart = bookstart;
-    }
-
-    public Date getBookover() {
-        return bookover;
-    }
-
-    public void setBookover(Date bookover) {
-        this.bookover = bookover;
-    }
-
-    public Date getOver() {
-        return over;
-    }
-
-    public void setOver(Date over) {
-        this.over = over;
-    }
-
-    public Date getStart() {
-
-        return start;
-    }
-
-    public void setStart(Date start) {
-        this.start = start;
-    }
-
-    public int getT1() {
+    public Integer getT1() {
         return t1;
     }
 
-    public void setT1(int t1) {
+    public void setT1(Integer t1) {
         this.t1 = t1;
     }
 
-    public int getT2() {
+    public Integer getT2() {
         return t2;
     }
 
-    public void setT2(int t2) {
+    public void setT2(Integer t2) {
         this.t2 = t2;
     }
 
-    public int getT3() {
+    public Integer getT3() {
         return t3;
     }
 
-    public void setT3(int t3) {
+    public void setT3(Integer t3) {
         this.t3 = t3;
     }
 
@@ -182,6 +150,38 @@ public class Search {
 
     public void setSearchName(String searchName) {
         this.searchName = searchName;
+    }
+
+    public Date getStart() {
+        return start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public Date getOver() {
+        return over;
+    }
+
+    public void setOver(Date over) {
+        this.over = over;
+    }
+
+    public Date getBookstart() {
+        return bookstart;
+    }
+
+    public void setBookstart(Date bookstart) {
+        this.bookstart = bookstart;
+    }
+
+    public Date getBookover() {
+        return bookover;
+    }
+
+    public void setBookover(Date bookover) {
+        this.bookover = bookover;
     }
 
     public Object getObject() {
