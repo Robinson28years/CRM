@@ -11,7 +11,7 @@
         <el-option v-for="item in  calendarTypeOptions" :key="item.key" :label="item.display_name+'('+item.key+')'" :value="item.key">
         </el-option>
       </el-select> -->
-      <el-select @change='handleFilter' style="width: 140px" class="filter-item" v-model="listQuery.sort" >
+      <el-select @change='handleFilter' style="width: 140px" class="filter-item" v-model="listQuery.sort">
         <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key">
         </el-option>
       </el-select>
@@ -74,78 +74,59 @@
       <el-table-column align="center" :label="$t('table.actions')" width="230" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">{{$t('table.edit')}}</el-button>
-          <el-button v-if="scope.row.status!='published'" size="mini" type="success"  @click="handleModifyStatus(scope.row,'published')">访问记录
-          </el-button>
+          <!-- <el-button v-if="scope.row.status!='published'" size="mini" type="success" @click="handleModifyStatus(scope.row,'published')">访问记录
+          </el-button> -->
           <!-- <el-button v-if="scope.row.status!='draft'" size="mini" @click="handleModifyStatus(scope.row,'draft')">{{$t('table.draft')}}
           </el-button> -->
-          <el-button v-if="scope.row.status!='deleted'" size="mini" type="danger" @click="handleModifyStatus(scope.row,'deleted')">{{$t('table.delete')}}
+          <el-button v-if="scope.row.status!='deleted'" size="mini" type="danger" @click="handleDelete(scope.row)">{{$t('table.delete')}}
           </el-button>
         </template>
       </el-table-column>
     </el-table>
 
     <div class="pagination-container">
-      <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page" :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
+      <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page"
+        :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination>
     </div>
 
-    <el-dialog title="添加业主" :visible.sync="dialogFormVisible">
-      <el-steps :active="active" align-center>
-        <el-step title="步骤 1" description="填写基本信息" icon="el-icon-edit"></el-step>
-        <el-step title="步骤 2" description="填写地址信息" icon="el-icon-picture"></el-step>
-        <el-step title="步骤 3" description="上传人脸" icon="el-icon-upload"></el-step>
-      </el-steps>
-      <el-form v-show="active==1" :rules="rules" ref="dataForm" :model="temp" label-position="left" label-width="80px" style='width: 400px; margin-left:50px;'>
-        <el-form-item label="姓名" prop="title">
-          <el-input v-model="temp.name"></el-input>
-        </el-form-item>
-        <el-form-item label="手机号" prop="title">
-          <el-input v-model="temp.phone"></el-input>
-        </el-form-item>
-        <el-form-item label="邮箱" prop="title">
-          <el-input v-model="temp.email"></el-input>
-        </el-form-item>
-        <el-form-item label="预设密码" prop="title">
-          <el-input v-model="temp.password" type="password"></el-input>
-        </el-form-item>
-      </el-form>
-
-      <el-form v-show="active==2" :rules="rules" ref="dataForm" :model="temp" label-position="left" label-width="80px" style='width: 400px; margin-left:50px;'>
-        <el-form-item label="楼幢" prop="type">
-          <el-select class="filter-item" v-model="temp2.building_id" placeholder="Please select">
-            <el-option v-for="item in  buildings" :key="item.key" :label="item.display_name" :value="item.key">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="单元" prop="type">
-          <el-select class="filter-item" v-model="temp2.unit_id" placeholder="Please select">
-            <el-option v-for="item in  units" :key="item.key" :label="item.display_name" :value="item.key">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="房号" prop="type">
-           <el-input v-model="temp2.room_id"></el-input>
-        </el-form-item>
-      </el-form>
-      <el-form v-show="active==3" :rules="rules" ref="dataForm" :model="temp" label-position="left" label-width="80px" style='width: 400px; margin-left:50px;'>
-        <el-form-item prop="type">
-          <el-upload
-            class="avatar-uploader"
-            :action="uploadUrl"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload">
-            <img v-if="imageUrl" :src="imageUrl" class="avatar">
-            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-          </el-upload>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">{{$t('table.cancel')}}</el-button>
-        <el-button v-if="active == 3" type="primary" @click="submit">提交</el-button>
-        <el-button v-else type="primary" @click="next">下一步</el-button>
+    <el-dialog title="更新" :visible.sync="dialogFormVisible" width="30%" :before-close="handleClose">
+      <div class="app-container">
+        <el-form :model="ruleForm2" status-icon  ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+          <el-form-item label="用户姓名" prop="name">
+            <el-input type="text" v-model="ruleForm2.username" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="pass">
+            <el-input type="password" v-model="ruleForm2.password" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="出生日期" prop="date">
+            <div class="block">
+              <!-- <span class="demonstration">默认</span> -->
+              <el-date-picker v-model="ruleForm2.birthday" type="datetime" placeholder="选择日期">
+              </el-date-picker>
+            </div>
+          </el-form-item>
+          <el-form-item label="性别" prop="sex">
+            <el-radio-group v-model="ruleForm2.sex">
+              <el-radio label="男">男</el-radio>
+              <el-radio label="女">女</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="角色" prop="role">
+            <el-select v-model="ruleForm2.roleid" placeholder="请选择">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="updateForm('ruleForm2')">更新</el-button>
+            <el-button @click="resetForm('ruleForm2')">重置</el-button>
+          </el-form-item>
+        </el-form>
       </div>
     </el-dialog>
+
+
 
     <el-dialog title="Reading statistics" :visible.sync="dialogPvVisible">
       <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
@@ -161,163 +142,246 @@
 </template>
 
 <script>
-import { fetchPv, createArticle, updateArticle } from '@/api/article'
-import { createUser,createAddress,getFaceId,createUserAddress,fetchList } from '@/api/manager'
-import waves from '@/directive/waves' // 水波纹指令
-import { parseTime } from '@/utils'
-import baseURL from '../../../config/api'
+  import * as util from '@/utils/index'
+  import {
+    fetchPv,
+    createArticle,
+    updateArticle
+  } from '@/api/article'
+  import {
+    createUser,
+    createAddress,
+    getFaceId,
+    createUserAddress,
+    fetchList
+  } from '@/api/manager'
+  import waves from '@/directive/waves' // 水波纹指令
+  import {
+    parseTime
+  } from '@/utils'
+  import baseURL from '../../../config/api'
 
-const buildings = [
-  { key: '1', display_name: '一幢' },
-  { key: '2', display_name: '二幢' },
-  { key: '3', display_name: '三幢' },
-  { key: '4', display_name: '四幢' },
-  { key: '5', display_name: '五幢' },
-  { key: '6', display_name: '六幢' },
-  { key: '7', display_name: '七幢' },
-  { key: '8', display_name: '八幢' },
-  { key: '9', display_name: '九幢' },
-]
-
-const units = [
-  { key: '1', display_name: '一单元' },
-  { key: '2', display_name: '二单元' },
-  { key: '3', display_name: '三单元' },
-  { key: '4', display_name: '四单元' },
-  { key: '5', display_name: '五单元' },
-]
-
-// arr to obj ,such as { CN : "China", US : "USA" }
-// const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
-//   acc[cur.key] = cur.display_name
-//   return acc
-// }, {})
-
-export default {
-  name: 'complexTable',
-  directives: {
-    waves
-  },
-  data() {
-    return {
-      uploadUrl: baseURL+"/face/upload",
-      imageUrl:'',
-      active:1,
-      tableKey: 0,
-      list: null,
-      total: null,
-      listLoading: true,
-      listQuery: {
-        page: 1,
-        limit: 20,
-        importance: undefined,
-        title: undefined,
-        type: undefined,
-        type2: undefined,
-        sort: '+id'
-      },
-      importanceOptions: [1, 2, 3],
-      // calendarTypeOptions,
-      buildings,
-      units,
-      sortOptions: [{ label: '正序', key: '+id' }, { label: '逆序', key: '-id' }],
-      statusOptions: ['published', 'draft', 'deleted'],
-      showReviewer: false,
-      temp: {
-        name: '',
-        phone: '',
-        email: '',
-        password: '',
-      },
-      temp2:{
-        building_id: '',
-        unit_id: '',
-        room_id:'',
-      },
-      temp3:{
-        pic_path:'',
-      },
-      temp4:{
-        user:'',
-        face_id:'',
-        address:'',
-      },
-      dialogFormVisible: false,
-      dialogStatus: '',
-      textMap: {
-        update: 'Edit',
-        create: 'Create'
-      },
-      dialogPvVisible: false,
-      pvData: [],
-      rules: {
-        type: [{ required: false, message: 'type is required', trigger: 'change' }],
-        timestamp: [{ type: 'date', required: false, message: 'timestamp is required', trigger: 'change' }],
-        title: [{ required: false, message: 'title is required', trigger: 'blur' }]
-      },
-      downloadLoading: false
-    }
-  },
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        0: 'success',
-        draft: 'info',
-        deleted: 'danger'
-      }
-      return statusMap[status]
+  const buildings = [{
+      key: '1',
+      display_name: '一幢'
     },
-    typeFilter(type) {
-      return calendarTypeKeyValue[type]
-    }
-  },
-  created() {
-    this.getList()
-  },
-  methods: {
-      submit(){
+    {
+      key: '2',
+      display_name: '二幢'
+    },
+    {
+      key: '3',
+      display_name: '三幢'
+    },
+    {
+      key: '4',
+      display_name: '四幢'
+    },
+    {
+      key: '5',
+      display_name: '五幢'
+    },
+    {
+      key: '6',
+      display_name: '六幢'
+    },
+    {
+      key: '7',
+      display_name: '七幢'
+    },
+    {
+      key: '8',
+      display_name: '八幢'
+    },
+    {
+      key: '9',
+      display_name: '九幢'
+    },
+  ]
+
+  const units = [{
+      key: '1',
+      display_name: '一单元'
+    },
+    {
+      key: '2',
+      display_name: '二单元'
+    },
+    {
+      key: '3',
+      display_name: '三单元'
+    },
+    {
+      key: '4',
+      display_name: '四单元'
+    },
+    {
+      key: '5',
+      display_name: '五单元'
+    },
+  ]
+
+  // arr to obj ,such as { CN : "China", US : "USA" }
+  // const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
+  //   acc[cur.key] = cur.display_name
+  //   return acc
+  // }, {})
+
+  export default {
+    name: 'complexTable',
+    directives: {
+      waves
+    },
+    data() {
+      return {
+        options: [{
+          value: '1',
+          label: '管理员'
+        }, {
+          value: '2',
+          label: '销售'
+        }, {
+          value: '3',
+          label: '业务经理'
+        }],
+        ruleForm2: '',
+        uploadUrl: baseURL + "/face/upload",
+        imageUrl: '',
+        active: 1,
+        tableKey: 0,
+        list: null,
+        total: null,
+        listLoading: true,
+        listQuery: {
+          page: 1,
+          limit: 20,
+          importance: undefined,
+          title: undefined,
+          type: undefined,
+          type2: undefined,
+          sort: '+id'
+        },
+        importanceOptions: [1, 2, 3],
+        // calendarTypeOptions,
+        buildings,
+        units,
+        sortOptions: [{
+          label: '正序',
+          key: '+id'
+        }, {
+          label: '逆序',
+          key: '-id'
+        }],
+        statusOptions: ['published', 'draft', 'deleted'],
+        showReviewer: false,
+        temp: {
+          name: '',
+          phone: '',
+          email: '',
+          password: '',
+        },
+        temp2: {
+          building_id: '',
+          unit_id: '',
+          room_id: '',
+        },
+        temp3: {
+          pic_path: '',
+        },
+        temp4: {
+          user: '',
+          face_id: '',
+          address: '',
+        },
+        dialogFormVisible: false,
+        dialogStatus: '',
+        textMap: {
+          update: 'Edit',
+          create: 'Create'
+        },
+        dialogPvVisible: false,
+        pvData: [],
+        rules: {
+          type: [{
+            required: false,
+            message: 'type is required',
+            trigger: 'change'
+          }],
+          timestamp: [{
+            type: 'date',
+            required: false,
+            message: 'timestamp is required',
+            trigger: 'change'
+          }],
+          title: [{
+            required: false,
+            message: 'title is required',
+            trigger: 'blur'
+          }]
+        },
+        downloadLoading: false
+      }
+    },
+    filters: {
+      statusFilter(status) {
+        const statusMap = {
+          0: 'success',
+          draft: 'info',
+          deleted: 'danger'
+        }
+        return statusMap[status]
+      },
+      typeFilter(type) {
+        return calendarTypeKeyValue[type]
+      }
+    },
+    created() {
+      this.getList()
+    },
+    methods: {
+      submit() {
         let user;
         let address;
         let face_id;
         getFaceId({
-          'pic_path':this.temp3.pic_path
+          'pic_path': this.temp3.pic_path
         }).then(res => {
           face_id = res.data.face_id;
-            createUser({
-              'name' : this.temp.name,
-              'email': this.temp.email,
-              'phone': this.temp.phone,
-              'password':this.temp.password,
-              'face_id': face_id
+          createUser({
+            'name': this.temp.name,
+            'email': this.temp.email,
+            'phone': this.temp.phone,
+            'password': this.temp.password,
+            'face_id': face_id
 
-            }).then(response => {
-              console.log(response.data);
-              user = response.data.data;
-              createAddress({
-                'building_id': this.temp2.building_id,
-                'unit_id': this.temp2.unit_id,
-                'room_id': this.temp2.room_id,
+          }).then(response => {
+            console.log(response.data);
+            user = response.data.data;
+            createAddress({
+              'building_id': this.temp2.building_id,
+              'unit_id': this.temp2.unit_id,
+              'room_id': this.temp2.room_id,
+            }).then(res => {
+              console.log(res.data);
+              address = res.data.data;
+              createUserAddress(address.id, {
+                'user_id': user.id,
+                'role_id': 5,
               }).then(res => {
-                console.log(res.data);
-                address = res.data.data;
-                        createUserAddress(address.id,{
-                          'user_id':user.id,
-                          'role_id': 5,
-                        }).then(res => {
-                          console.log(res);
-                          console.log(this.list);
-                          // this.list.push(res.data.data);
-                          this.getList();
-                          this.dialogFormVisible = false
-                            this.$notify({
-                              title: '成功',
-                              message: '业主添加成功',
-                              type: 'success',
-                              duration: 2000
-                            })
-                        })
+                console.log(res);
+                console.log(this.list);
+                // this.list.push(res.data.data);
+                this.getList();
+                this.dialogFormVisible = false
+                this.$notify({
+                  title: '成功',
+                  message: '业主添加成功',
+                  type: 'success',
+                  duration: 2000
+                })
               })
             })
+          })
         })
       },
       handleAvatarSuccess(res, file) {
@@ -338,145 +402,176 @@ export default {
         }
         return isJPG && isLt2M;
       },
-    next() {
+      next() {
         if (this.active++ > 2) this.active = 0;
       },
-    getList() {
-      this.listLoading = true
-      
-      axios.post('/api/users/getAll').then(response => {
-        //   console.log(response.data.data[0].address.id)
-        this.list = response.data.res
-        // this.total = response.data.total
-        this.listLoading = false
-      })
-    },
-    handleFilter() {
-      this.listQuery.page = 1
-      this.getList()
-    },
-    handleSizeChange(val) {
-      this.listQuery.limit = val
-      this.getList()
-    },
-    handleCurrentChange(val) {
-      this.listQuery.page = val
-      this.getList()
-    },
-    handleModifyStatus(row, status) {
-      this.$message({
-        message: '操作成功',
-        type: 'success'
-      })
-      row.status = status
-    },
-    resetTemp() {
-      this.temp = {
-        id: undefined,
-        importance: 1,
-        remark: '',
-        timestamp: new Date(),
-        title: '',
-        status: 'published',
-        type: ''
-      }
-    },
-    handleCreate() {
-      this.resetTemp()
-      this.dialogStatus = 'create'
-      this.dialogFormVisible = true
-      this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
-    },
-    createData() {
-      this.$refs['dataForm'].validate((valid) => {
-        if (valid) {
-          this.temp.id = parseInt(Math.random() * 100) + 1024 // mock a id
-          this.temp.author = 'vue-element-admin'
-          createArticle(this.temp).then(() => {
-            this.list.unshift(this.temp)
-            this.dialogFormVisible = false
-            this.$notify({
-              title: '成功',
-              message: '创建成功',
-              type: 'success',
-              duration: 2000
-            })
-          })
+      getList() {
+        this.listLoading = true
+
+        axios.post('/api/users/getAll').then(response => {
+          //   console.log(response.data.data[0].address.id)
+          this.list = response.data.res
+          // this.total = response.data.total
+          this.listLoading = false
+        })
+      },
+      handleFilter() {
+        this.listQuery.page = 1
+        this.getList()
+      },
+      handleSizeChange(val) {
+        this.listQuery.limit = val
+        this.getList()
+      },
+      handleCurrentChange(val) {
+        this.listQuery.page = val
+        this.getList()
+      },
+      handleModifyStatus(row, status) {
+        this.$message({
+          message: '操作成功',
+          type: 'success'
+        })
+        row.status = status
+      },
+      resetTemp() {
+        this.temp = {
+          id: undefined,
+          importance: 1,
+          remark: '',
+          timestamp: new Date(),
+          title: '',
+          status: 'published',
+          type: ''
         }
-      })
-    },
-    handleUpdate(row) {
-      this.temp = Object.assign({}, row) // copy obj
-      this.temp.timestamp = new Date(this.temp.timestamp)
-      this.dialogStatus = 'update'
-      this.dialogFormVisible = true
-      this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
-    },
-    updateData() {
-      this.$refs['dataForm'].validate((valid) => {
-        if (valid) {
-          const tempData = Object.assign({}, this.temp)
-          tempData.timestamp = +new Date(tempData.timestamp) // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
-          updateArticle(tempData).then(() => {
-            for (const v of this.list) {
-              if (v.id === this.temp.id) {
-                const index = this.list.indexOf(v)
-                this.list.splice(index, 1, this.temp)
-                break
+      },
+      handleCreate() {
+        this.resetTemp()
+        this.dialogStatus = 'create'
+        this.dialogFormVisible = true
+        this.$nextTick(() => {
+          this.$refs['dataForm'].clearValidate()
+        })
+      },
+      createData() {
+        this.$refs['dataForm'].validate((valid) => {
+          if (valid) {
+            this.temp.id = parseInt(Math.random() * 100) + 1024 // mock a id
+            this.temp.author = 'vue-element-admin'
+            createArticle(this.temp).then(() => {
+              this.list.unshift(this.temp)
+              this.dialogFormVisible = false
+              this.$notify({
+                title: '成功',
+                message: '创建成功',
+                type: 'success',
+                duration: 2000
+              })
+            })
+          }
+        })
+      },
+      handleUpdate(row) {
+        this.temp = Object.assign({}, row) // copy obj
+        this.temp.timestamp = new Date(this.temp.timestamp)
+        this.dialogStatus = 'update'
+        this.dialogFormVisible = true
+        // this.ruleForm2=this.list[row]
+        this.ruleForm2 = row
+        console.log(row)
+        // console.log(this.list)
+        this.$nextTick(() => {
+          this.$refs['dataForm'].clearValidate()
+        })
+      },
+      updateForm() {
+        axios.post('/api/users/update', {
+          "id": this.ruleForm2.id,
+          "username": this.ruleForm2.username,
+          "password": this.ruleForm2.password,
+          "sex": this.ruleForm2.sex,
+          "birthday": util.parseTime(this.ruleForm2.birthday),
+          "roleid": this.ruleForm2.roleid,
+          "status": 0,
+          // "createtime": this.ruleForm2.name,
+        }).then(response => {
+          this.$notify({
+            title: '成功',
+            message: '更新用户成功',
+            type: 'success',
+            duration: 2000
+          })
+          this.dialogFormVisible = false
+          this.$router.push('/user/list')
+          console.log(response.data)
+        })
+      },
+      updateData() {
+        this.$refs['dataForm'].validate((valid) => {
+          if (valid) {
+            const tempData = Object.assign({}, this.temp)
+            tempData.timestamp = +new Date(tempData.timestamp) // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
+            updateArticle(tempData).then(() => {
+              for (const v of this.list) {
+                if (v.id === this.temp.id) {
+                  const index = this.list.indexOf(v)
+                  this.list.splice(index, 1, this.temp)
+                  break
+                }
               }
-            }
-            this.dialogFormVisible = false
-            this.$notify({
-              title: '成功',
-              message: '更新成功',
-              type: 'success',
-              duration: 2000
+              this.dialogFormVisible = false
+              this.$notify({
+                title: '成功',
+                message: '更新成功',
+                type: 'success',
+                duration: 2000
+              })
             })
-          })
-        }
-      })
-    },
-    handleDelete(row) {
-      this.$notify({
-        title: '成功',
-        message: '删除成功',
-        type: 'success',
-        duration: 2000
-      })
-      const index = this.list.indexOf(row)
-      this.list.splice(index, 1)
-    },
-    handleFetchPv(pv) {
-      fetchPv(pv).then(response => {
-        this.pvData = response.data.pvData
-        this.dialogPvVisible = true
-      })
-    },
-    handleDownload() {
-      this.downloadLoading = true
-      import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['timestamp', 'title', 'type', 'importance', 'status']
-        const filterVal = ['timestamp', 'title', 'type', 'importance', 'status']
-        const data = this.formatJson(filterVal, this.list)
-        excel.export_json_to_excel(tHeader, data, 'table-list')
-        this.downloadLoading = false
-      })
-    },
-    formatJson(filterVal, jsonData) {
-      return jsonData.map(v => filterVal.map(j => {
-        if (j === 'timestamp') {
-          return parseTime(v[j])
-        } else {
-          return v[j]
-        }
-      }))
+          }
+        })
+      },
+      handleDelete(row) {
+        this.$notify({
+          title: '成功',
+          message: '删除成功',
+          type: 'success',
+          duration: 2000
+        })
+        const index = this.list.indexOf(row)
+        console.log(index)
+        axios.post('/api/users/delete?id='+row.id).then(response => {
+
+        })
+        this.list.splice(index, 1)
+      },
+      handleFetchPv(pv) {
+        fetchPv(pv).then(response => {
+          this.pvData = response.data.pvData
+          this.dialogPvVisible = true
+        })
+      },
+      handleDownload() {
+        this.downloadLoading = true
+        import ('@/vendor/Export2Excel').then(excel => {
+          const tHeader = ['timestamp', 'title', 'type', 'importance', 'status']
+          const filterVal = ['timestamp', 'title', 'type', 'importance', 'status']
+          const data = this.formatJson(filterVal, this.list)
+          excel.export_json_to_excel(tHeader, data, 'table-list')
+          this.downloadLoading = false
+        })
+      },
+      formatJson(filterVal, jsonData) {
+        return jsonData.map(v => filterVal.map(j => {
+          if (j === 'timestamp') {
+            return parseTime(v[j])
+          } else {
+            return v[j]
+          }
+        }))
+      }
     }
   }
-}
+
 </script>
 <style scoped>
   .avatar-uploader .el-upload {
@@ -486,9 +581,11 @@ export default {
     position: relative;
     overflow: hidden;
   }
+
   .avatar-uploader .el-upload:hover {
     border-color: #409EFF;
   }
+
   .avatar-uploader-icon {
     font-size: 28px;
     color: #8c939d;
@@ -497,9 +594,11 @@ export default {
     line-height: 178px;
     text-align: center;
   }
+
   .avatar {
     width: 178px;
     height: 178px;
     display: block;
   }
+
 </style>
