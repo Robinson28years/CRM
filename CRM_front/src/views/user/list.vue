@@ -452,7 +452,11 @@
         axios.post('/api/users/getAllSelect', this.listQuery).then(response => {
           //   console.log(response.data.data[0].address.id)
           this.list = response.data.res.object
+          console.log(response.data.res.total / this.listQuery.limit)
+          if(response.data.res.total % this.listQuery.limit !=0)
           this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit) + 1
+          else 
+          this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit)
           // this.total = response.data.total
           this.listLoading = false
         })
