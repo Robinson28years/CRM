@@ -1,6 +1,7 @@
 package com.fourzeroeight.crm.service;
 
 import com.fourzeroeight.crm.bean.Customers;
+import com.fourzeroeight.crm.bean.Search;
 import com.fourzeroeight.crm.mapper.CustomersMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,6 +32,15 @@ public class CustomersServiceImpl implements CustomersService {
     @Override
     public void update(Customers bookinfo) {
         mapper.updateByPrimaryKeySelective(bookinfo);
+    }
+
+    @Override
+    public Search getAllSelect(Search search) {
+        List<Customers> list = mapper.getListBySearch(search);
+
+        search.setObject(list);
+        search.setTotal(mapper.getCountBySearch(search));
+        return search;
     }
 
 

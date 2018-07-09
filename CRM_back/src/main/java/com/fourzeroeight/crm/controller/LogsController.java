@@ -2,6 +2,7 @@ package com.fourzeroeight.crm.controller;
 
 import com.fourzeroeight.crm.bean.Logs;
 import com.fourzeroeight.crm.bean.Message;
+import com.fourzeroeight.crm.bean.Search;
 import com.fourzeroeight.crm.service.LogsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,10 @@ public class LogsController {
     public Message getAll(){
         return new Message(1,null,service.getAll());
     }
-
+    @RequestMapping("getAllSelect")
+    public Message getAllSelect(@RequestBody Search search){
+        return new Message(1,null,service.getAllSelect(search));
+    }
     @RequestMapping("delete")
     public Message delete(@RequestParam int id){
         service.delete(id);

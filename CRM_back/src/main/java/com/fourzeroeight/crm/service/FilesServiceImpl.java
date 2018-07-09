@@ -1,6 +1,7 @@
 package com.fourzeroeight.crm.service;
 
 import com.fourzeroeight.crm.bean.Files;
+import com.fourzeroeight.crm.bean.Search;
 import com.fourzeroeight.crm.mapper.CustomersMapper;
 import com.fourzeroeight.crm.mapper.FilesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,18 @@ public class FilesServiceImpl implements FilesService {
         }
         return list;
     }
+
+    @Override
+    public Search getAllSelect(Search search) {
+        List<Files> list = mapper.getListBySearch(search);
+        for (Files b : list) {
+            b.setCust(customersMapper.selectByPrimaryKey(b.getCustid()));
+        }
+        search.setObject(list);
+        search.setTotal(mapper.getCountBySearch(search));
+        return search;
+    }
+
     @Override
     public void delete(int id) {
         mapper.deleteByPrimaryKey(id);

@@ -26,6 +26,27 @@
     id, name, type, background, listed, capital, sales, scale, tester, url, zipcode, 
     address, products, services, userid, NewColumn1, createtime
   </sql>
+
+  <select id="getListBySearch" parameterType="com.fourzeroeight.crm.bean.Search" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from customers
+      <where>
+        <if test="search !=null and search != ''">
+          and ${searchName} like CONCAT('%', #{search}, '%')
+        </if>
+
+      </where>
+    ORDER BY ${orderName} ${order},id  LIMIT #{offset},#{limit}
+  </select>
+
+  <select id="getCountBySearch" parameterType="com.fourzeroeight.crm.bean.Search" resultType="int">
+    select count(1) from customers
+    <where>
+      <if test="search !=null and search != ''">
+        and ${searchName} like CONCAT('%', #{search}, '%')
+      </if>
+    </where>
+  </select>
+
   <insert id="insertSelective" parameterType="com.fourzeroeight.crm.bean.Customers">
     insert into customers
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -129,6 +150,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.fourzeroeight.crm.bean.Customers">
     update customers
     <set>
@@ -183,4 +205,5 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
 </mapper>

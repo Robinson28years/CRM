@@ -1,5 +1,6 @@
 package com.fourzeroeight.crm.mapper;
 
+import com.fourzeroeight.crm.bean.Search;
 import com.fourzeroeight.crm.bean.Users;
 import org.apache.ibatis.annotations.*;
 
@@ -63,4 +64,8 @@ public interface UsersMapper {
     })
     @ResultMap("BaseResultMap")
     Users selectByUsername(String username);
+
+    List<Users> getListBySearch(Search search);
+
+    int getCountBySearch(Search search);
 }
