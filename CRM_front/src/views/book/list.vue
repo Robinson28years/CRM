@@ -1,7 +1,11 @@
 <template>
   <div class="app-container calendar-list-container">
     <div class="filter-container">
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="客户名称" v-model="listQuery.search">
+      <el-select clearable style="width: 110px" class="filter-item" v-model="listQuery.searchName" placeholder="查询字段">
+        <el-option label="描述" value="descs"></el-option>
+        <el-option label="标题" value="title"></el-option>
+      </el-select>
+      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="搜索框" v-model="listQuery.search">
       </el-input>
       <el-select @change='handleFilter' style="width: 140px" class="filter-item" v-model="listQuery.order">
         <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key">
@@ -37,6 +41,11 @@
       <el-table-column width="170px" align="center" label="创建日期">
         <template slot-scope="scope">
           <span>{{scope.row.createtime}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column width="170px" align="center" label="客户名称">
+        <template slot-scope="scope">
+          <span>{{scope.row.cust.name}}</span>
         </template>
       </el-table-column>
       <el-table-column width="150px" align="center" label="标题">
@@ -248,8 +257,25 @@
     directives: {
       waves
     },
+    mounted() {
+      axios.post('/api/customers/getAll').then(response => {
+        let data = response.data.res
+        let i = 0
+        while (data[i]) {
+          let option = {
+            value: '',
+            label: '',
+          }
+          option.value = data[i].id
+          option.label = data[i].name
+          this.options.push(option)
+          i++
+        }
+      })
+    },
     data() {
       return {
+        options:[],
         form: '',
         uploadUrl: baseURL + "/face/upload",
         imageUrl: '',
@@ -270,7 +296,7 @@
           "page": 1,
           "offset": 0,
           "search": "",
-          "searchName": "custname",
+          "searchName": "descs",
           "order": "ASC",
           "orderName": "id",
           "start": null,

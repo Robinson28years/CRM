@@ -30,6 +30,11 @@
         </el-col>
       </el-row>
       <el-row>
+        <!-- <el-col :span="12">
+          <el-form-item label="预定时间">
+            <el-date-picker type="datetime" placeholder="选择日期" v-model="form.booktime" style="width: 100%;"></el-date-picker>
+          </el-form-item>
+        </el-col> -->
         <el-col :span="12">
           <el-form-item label="创建时间">
             <el-date-picker type="datetime" placeholder="选择日期" v-model="form.createtime" style="width: 100%;"></el-date-picker>
@@ -139,20 +144,20 @@
     methods: {
       onSubmit() {
         if (true) {
-          axios.post('/api/bookinfo/add', {
+          axios.post('/api/logs/add', {
             "custid": this.form.custid,
             "title": this.form.title,
             "descs": this.form.descs,
-            "booktime": util.parseTime(this.form.booktime),
+            // "booktime": util.parseTime(this.form.booktime),
             "createtime": util.parseTime(this.form.createtime)
           }).then(response => {
             this.$notify({
               title: '成功',
-              message: '新增预定成功',
+              message: '新增日志成功',
               type: 'success',
               duration: 3000
             })
-            this.$router.push('/book/list')
+            this.$router.push('/log/list')
             console.log(response.data)
           })
         } else {

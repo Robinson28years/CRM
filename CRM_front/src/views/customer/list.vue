@@ -107,9 +107,10 @@
             <el-col :span="12">
               <el-form-item label="申请类型">
                 <el-select v-model="form.type" placeholder="请选择申请类型">
-                  <el-option label="企业" value="1"></el-option>
+                  <el-option v-for="item in types" :key="item.key" :label="item.label" :value="item.value"></el-option>
+                  <!-- <el-option label="企业" value="1"></el-option>
                   <el-option label="院校" value="2"></el-option>
-                  <el-option label="合资" value="3"></el-option>
+                  <el-option label="合资" value="3"></el-option> -->
                 </el-select>
               </el-form-item>
             </el-col>
@@ -118,17 +119,19 @@
             <el-col :span="12">
               <el-form-item label="公司背景">
                 <el-select v-model="form.background" placeholder="请选择公司背景">
-                  <el-option label="民营" value="1"></el-option>
+                  <el-option v-for="item in backgrounds" :key="item.key" :label="item.label" :value="item.value"></el-option>
+                  <!-- <el-option label="民营" value="1"></el-option>
                   <el-option label="国营" value="2"></el-option>
-                  <el-option label="合资" value="3"></el-option>
+                  <el-option label="合资" value="3"></el-option> -->
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="是否上市">
                 <el-select v-model="form.listed" placeholder="请选择活动区域">
-                  <el-option label="是" value="1"></el-option>
-                  <el-option label="否" value="0"></el-option>
+                   <el-option v-for="item in listeds" :key="item.key" :label="item.label" :value="item.value"></el-option>
+                  <!-- <el-option label="是" value="1"></el-option>
+                  <el-option label="否" value="0"></el-option> -->
                 </el-select>
               </el-form-item>
             </el-col>
@@ -192,10 +195,11 @@
             <el-col :span="12">
               <el-form-item label="客户状态">
                 <el-select v-model="form.newcolumn1" placeholder="请选择客户状态">
-                  <el-option label="潜在客户" value="1"></el-option>
+                   <el-option v-for="item in status" :key="item.key" :label="item.label" :value="item.value"></el-option>
+                  <!-- <el-option label="潜在客户" value="1"></el-option>
                   <el-option label="正式客户" value="2"></el-option>
                   <el-option label="放弃客户" value="3"></el-option>
-                  <el-option label="签约客户" value="4"></el-option>
+                  <el-option label="签约客户" value="4"></el-option> -->
                 </el-select>
               </el-form-item>
             </el-col>
@@ -328,14 +332,54 @@
     data() {
       return {
         options: [{
-          value: '1',
+          value: 1,
           label: '管理员'
         }, {
-          value: '2',
+          value: 2,
           label: '销售'
         }, {
-          value: '3',
+          value: 3,
           label: '业务经理'
+        }],
+        types: [{
+          value: 1,
+          label: '企业'
+        }, {
+          value: 2,
+          label: '院校'
+        }, {
+          value: 3,
+          label: '合资'
+        }],
+        backgrounds: [{
+          value: 1,
+          label: '民营'
+        }, {
+          value: 2,
+          label: '国营'
+        }, {
+          value: 3,
+          label: '合资'
+        }],
+        listeds: [{
+          value: 1,
+          label: '是'
+        }, {
+          value: 0,
+          label: '否'
+        }],
+        status: [{
+          value: 1,
+          label: '潜在客户'
+        }, {
+          value: 2,
+          label: '正式客户'
+        }, {
+          value: 3,
+          label: '放弃客户'
+        }, {
+          value: 4,
+          label: '签约客户'
         }],
 
         uploadUrl: baseURL + "/face/upload",
@@ -609,7 +653,7 @@
           "services": this.form.services,
           "userid": this.form.userid,
           "newcolumn1": this.form.newcolumn1,
-          "background": this.form.back,
+          "background": this.form.background,
           "capital": this.form.capital,
           "listed": this.form.listed,
           "createtime": util.parseTime(this.form.createtime)

@@ -77,7 +77,8 @@
       </el-table-column> -->
       <el-table-column align="center" label="状态" width="95">
         <template slot-scope="scope">
-          <span class="link-type">正常</span>
+          <span class="link-type" v-if="scope.row.status==0">正常</span>
+          <span class="link-type" v-else>冻结</span>
         </template>
       </el-table-column>
       <!-- <el-table-column class-name="status-col" :label="$t('table.status')" width="100">
@@ -129,8 +130,13 @@
           </el-form-item>
           <el-form-item label="角色" prop="role">
             <el-select v-model="ruleForm2.roleid" placeholder="请选择">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+              <el-option v-for="item in options" :key="item.key" :label="item.label" :value="item.value">
               </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="状态">
+            <el-select v-model="ruleForm2.status" placeholder="请选择状态">
+              <el-option v-for="item in status" :key="item.key" :label="item.label" :value="item.value"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item>
@@ -250,14 +256,21 @@
     data() {
       return {
         options: [{
-          value: '1',
+          value: 1,
           label: '管理员'
         }, {
-          value: '2',
+          value: 2,
           label: '销售'
         }, {
-          value: '3',
+          value: 3,
           label: '业务经理'
+        }],
+        status: [{
+          value: 0,
+          label: '正常'
+        }, {
+          value: 1,
+          label: '冻结'
         }],
         ruleForm2: '',
         uploadUrl: baseURL + "/face/upload",
@@ -524,7 +537,7 @@
           "sex": this.ruleForm2.sex,
           "birthday": util.parseTime(this.ruleForm2.birthday),
           "roleid": this.ruleForm2.roleid,
-          "status": 0,
+          "status": this.ruleForm2.status,
           // "createtime": this.ruleForm2.name,
         }).then(response => {
           this.$notify({

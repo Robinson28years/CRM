@@ -1,7 +1,13 @@
 <template>
   <div class="app-container calendar-list-container">
     <div class="filter-container">
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="客户名称" v-model="listQuery.search">
+      <el-select clearable style="width: 110px" class="filter-item" v-model="listQuery.searchName" placeholder="查询字段">
+        <el-option label="客户名称" value="custname"></el-option>
+        <el-option label="客户姓名" value="name"></el-option>
+        <el-option label="部门名称" value="dept"></el-option>
+        <el-option label="客户手机" value="mobile"></el-option>
+      </el-select>
+      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="搜索框" v-model="listQuery.search">
       </el-input>
       <el-select @change='handleFilter' style="width: 140px" class="filter-item" v-model="listQuery.order">
         <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key">
@@ -13,7 +19,7 @@
       <el-checkbox class="filter-item" style='margin-left:15px;' @change='tableKey=tableKey+1' v-model="showReviewer">{{$t('table.reviewer')}}</el-checkbox>
     </div>
 
-      <el-row>
+    <el-row>
       <el-col :span="4">
         <div class="block">
           <el-date-picker v-model="listQuery.start" type="datetime" placeholder="起始日期">
@@ -108,7 +114,7 @@
             <el-col :span="24">
               <el-form-item label="公司名称" prop="custname">
                 <el-select v-model="form.custid" placeholder="请选择">
-                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                  <el-option v-for="item in options" :key="item.key" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
               </el-form-item>
@@ -162,8 +168,10 @@
             <el-col :span="12">
               <el-form-item label="技术程度">
                 <el-select v-model="form.degree" placeholder="请选择技术程度">
-                  <el-option label="很懂" value="1"></el-option>
-                  <el-option label="一般" value="2"></el-option>
+                  <el-option v-for="item in degrees" :key="item.key" :label="item.label" :value="item.value">
+                  </el-option>
+                  <!-- <el-option label="很懂" value="1"></el-option>
+                  <el-option label="一般" value="2"></el-option> -->
                 </el-select>
               </el-form-item>
             </el-col>
@@ -295,9 +303,33 @@
     directives: {
       waves
     },
+    mounted() {
+      axios.post('/api/customers/getAll').then(response => {
+        let data = response.data.res
+        let i = 0
+        while (data[i]) {
+          let option = {
+            value: '',
+            label: '',
+          }
+          option.value = data[i].id
+          option.label = data[i].name
+          this.options.push(option)
+          i++
+        }
+      })
+    },
     data() {
       return {
-        form:'',
+        options: [],
+        degrees:[{
+          value: 1,
+          label: '很懂'
+        }, {
+          value: 2,
+          label: '一般'
+        }],
+        form: '',
         uploadUrl: baseURL + "/face/upload",
         imageUrl: '',
         active: 1,
@@ -473,7 +505,7 @@
           this.listQuery.start = util.parseTime(this.listQuery.start)
           this.listQuery.over = util.parseTime(this.listQuery.over)
         }
-        axios.post('api/contacts/getAllSelect', this.listQuery  ).then(response => {
+        axios.post('api/contacts/getAllSelect', this.listQuery).then(response => {
           //   console.log(response.data.data[0].address.id)
           this.list = response.data.res.object
           this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit) + 1
@@ -555,7 +587,7 @@
       },
       updateForm() {
         axios.post('/api/contacts/update', {
-          "id":this.form.id,
+          "id": this.form.id,
           "custid": this.form.custid,
           "name": this.form.name,
           "dept": this.form.dept,

@@ -3,7 +3,7 @@
     <div class="filter-container">
       <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="客户名称" v-model="listQuery.search">
       </el-input>
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="标题" v-model="listQuery.s1">
+      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="标签" v-model="listQuery.s1">
       </el-input>
       <el-select clearable style="width: 110px" class="filter-item" v-model="listQuery.s2" placeholder="文档类型">
         <el-option label="订单" value="订单"></el-option>
@@ -265,6 +265,7 @@
     },
     data() {
       return {
+        options:[],
         fileList: [],
         form: '',
         uploadUrl: baseURL + "/face/upload",
@@ -368,6 +369,22 @@
     },
     created() {
       this.getList()
+    },
+    mounted() {
+      axios.post('/api/customers/getAll').then(response => {
+        let data = response.data.res
+        let i = 0
+        while (data[i]) {
+          let option = {
+            value: '',
+            label: '',
+          }
+          option.value = data[i].id
+          option.label = data[i].name
+          this.options.push(option)
+          i++
+        }
+      })
     },
     methods: {
       submit() {

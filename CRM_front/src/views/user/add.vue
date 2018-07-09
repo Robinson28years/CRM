@@ -32,6 +32,12 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="状态">
+        <el-select v-model="ruleForm2.status" placeholder="请选择状态">
+          <el-option label="正常" value="0"></el-option>
+          <el-option label="冻结" value="1"></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
         <el-button @click="resetForm('ruleForm2')">重置</el-button>
@@ -70,6 +76,7 @@
           radio: '',
           sex: '',
           date: '',
+          status:'',
           roleid: '',
         },
         options: [{
@@ -125,15 +132,15 @@
           "sex": this.ruleForm2.sex,
           "birthday": util.parseTime(this.ruleForm2.date),
           "roleid": this.ruleForm2.roleid,
-          "status": 0,
+          "status": this.ruleForm2.status,
           // "createtime": this.ruleForm2.name,
         }).then(response => {
           this.$notify({
-              title: '成功',
-              message: '添加用户成功',
-              type: 'success',
-              duration: 2000
-            })
+            title: '成功',
+            message: '添加用户成功',
+            type: 'success',
+            duration: 2000
+          })
           this.$router.push('/user/list')
           console.log(response.data)
         })
