@@ -645,18 +645,17 @@
         })
       },
       handleDelete(row) {
-        this.$notify({
-          title: '成功',
-          message: '删除成功',
-          type: 'success',
-          duration: 2000
-        })
         const index = this.list.indexOf(row)
         console.log(index)
         axios.post('/api/contacts/delete?id=' + row.id).then(response => {
-
+          this.$notify({
+            title: '成功',
+            message: '删除成功',
+            type: 'success',
+            duration: 2000
+          })
+          this.list.splice(index, 1)
         })
-        this.list.splice(index, 1)
       },
       handleFetchPv(pv) {
         fetchPv(pv).then(response => {

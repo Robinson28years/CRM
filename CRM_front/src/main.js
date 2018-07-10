@@ -17,7 +17,6 @@ import './errorLog'// error log
 import './permission' // permission control
 // import './mock' // simulation data
 
-window.axios = require('axios');
 
 import * as filters from './filters' // global filters
 
@@ -36,7 +35,7 @@ Object.keys(filters).forEach(key => {
 
 Vue.config.productionTip = false
 
-new Vue({
+window.bus = new Vue({
   el: '#app',
   router,
   store,
@@ -44,3 +43,40 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+import axios from "axios"
+axios.interceptors.response.use(response => {
+  if(response.data.code == -1){
+    window.sessionStorage.removeItem("user")
+    bus.$router.push({ name: 'login'})
+    bus.$message({
+          message: '登陆失效',
+          type: 'warning'
+        });
+  }
+  else if(response.data.code == -2){
+    window.sessionStorage.removeItem("user")
+    bus.$router.push({ name: 'login'})
+    bus.$message({
+          message: '未登陆',
+          type: 'warning'
+        });
+  }
+  else{
+    if(response.data.code == 0){
+      bus.$message({
+        message: '操作失败',
+        type: 'warning'
+      });
+      const err = new Error()
+
+      throw err
+      
+    }else{
+      return response
+    }
+  }
+}, error => {
+  return Promise.reject(error)
+})
+export default axios
+window.axios = require('axios');

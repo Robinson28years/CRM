@@ -134,7 +134,7 @@
             <el-col :span="12">
               <el-form-item label="是否上市">
                 <el-select v-model="form.listed" placeholder="请选择活动区域">
-                   <el-option v-for="item in listeds" :key="item.key" :label="item.label" :value="item.value"></el-option>
+                  <el-option v-for="item in listeds" :key="item.key" :label="item.label" :value="item.value"></el-option>
                   <!-- <el-option label="是" value="1"></el-option>
                   <el-option label="否" value="0"></el-option> -->
                 </el-select>
@@ -200,7 +200,7 @@
             <el-col :span="12">
               <el-form-item label="客户状态">
                 <el-select v-model="form.newcolumn1" placeholder="请选择客户状态">
-                   <el-option v-for="item in status" :key="item.key" :label="item.label" :value="item.value"></el-option>
+                  <el-option v-for="item in status" :key="item.key" :label="item.label" :value="item.value"></el-option>
                   <!-- <el-option label="潜在客户" value="1"></el-option>
                   <el-option label="正式客户" value="2"></el-option>
                   <el-option label="放弃客户" value="3"></el-option>
@@ -417,7 +417,7 @@
         // calendarTypeOptions,
         buildings,
         units,
-                sortOptions: [{
+        sortOptions: [{
           label: '正序',
           key: 'ASC'
         }, {
@@ -563,13 +563,13 @@
           this.listQuery.start = util.parseTime(this.listQuery.start)
           this.listQuery.over = util.parseTime(this.listQuery.over)
         }
-        axios.post('api/customers/getAllSelect',this.listQuery).then(response => {
+        axios.post('api/customers/getAllSelect', this.listQuery).then(response => {
           //   console.log(response.data.data[0].address.id)
           this.list = response.data.res.object
-          if(response.data.res.total % this.listQuery.limit !=0)
-          this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit) + 1
-          else 
-          this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit)
+          if (response.data.res.total % this.listQuery.limit != 0)
+            this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit) + 1
+          else
+            this.listQuery.total = Math.floor(response.data.res.total / this.listQuery.limit)
           // this.total = response.data.total
           this.listLoading = false
         })
@@ -703,18 +703,26 @@
         })
       },
       handleDelete(row) {
-        this.$notify({
-          title: '成功',
-          message: '删除成功',
-          type: 'success',
-          duration: 2000
-        })
         const index = this.list.indexOf(row)
         console.log(index)
         axios.post('/api/customers/delete?id=' + row.id).then(response => {
-
+          // if (response.data.code == 1) {
+            this.$notify({
+              title: '成功',
+              message: '删除成功',
+              type: 'success',
+              duration: 2000
+            })
+            this.list.splice(index, 1)
+          // } else {
+          //   this.$notify({
+          //     title: '失败',
+          //     message: '删除失败',
+          //     type: 'danger',
+          //     duration: 2000
+          //   })
+          // }
         })
-        this.list.splice(index, 1)
       },
       handleFetchPv(pv) {
         fetchPv(pv).then(response => {
